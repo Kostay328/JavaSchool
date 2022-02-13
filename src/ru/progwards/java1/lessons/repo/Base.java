@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.repo;
 
+import java.util.Date;
+
 class Base {
     static String X_EQUALS = "x = ",
             Y_EQUALS = "y = ",
