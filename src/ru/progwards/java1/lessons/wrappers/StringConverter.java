@@ -1,13 +1,23 @@
 package ru.progwards.java1.lessons.wrappers;
 
 public class StringConverter {
-    public static Double volumeBallDouble(Double radius){
-        return (4/3)*3.14*(radius*radius*radius);
+    public static String fromByte(byte number){
+        return Byte.toString(number);
     }
-    public static Float volumeBallFloat(Float radius){
-         return 4F/(3F*3.14F)*radius*radius*radius;
+    public static String fromShort(short number){
+        return Short.toString(number);
     }
-    public static Double calculateAccuracy(Double radius){
-         return volumeBallDouble(radius)-volumeBallFloat(Float.valueOf(Double.toString(radius))).doubleValue();
+    public static String fromInt(int number){
+        return Integer.toString(number);
     }
+    public static String fromLong(long number){
+        return Long.toString(number);
+    }
+    public static String fromFloat(float number){
+        return Float.toString(number);
+    }
+    public static String fromDouble(double number){
+        return Double.toString(number);
+    }
+
 }
