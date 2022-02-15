@@ -14,9 +14,10 @@ public class Astronomy {
         return sphereSquare(71492.0);
     }
     public static Double earthVsMercury(){
-        return Double.valueOf(earthSquare()/mercurySquare() + ("" + earthSquare()%mercurySquare()).replace("0.", "."));
+        return earthSquare()/mercurySquare();
+//        System.out.println(earthSquare()/mercurySquare() + "" + ("" + earthSquare()%mercurySquare()).replace("0.", "."));
     }
     public static Double earthVsJupiter(){
-        return Double.valueOf(earthSquare()/jupiterSquare() + ("" + earthSquare()%jupiterSquare()).replace("0.", "."));
+        return earthSquare()/jupiterSquare();
     }
 }
