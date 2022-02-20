@@ -9,12 +9,13 @@ public class GoldenFibo {
         }
     }
     public static boolean isGoldenTriangle(int a, int b, int c){
-//        if(b == c)
-//            return (((double)b+(double)c)/(double)a) >= 1.61703 && (((double)b+(double)c)/(double)a) <= 1.61903;
-//        else if(a == c)
-//            return (((double)a+(double)c)/(double)b) >= 1.61703 && (((double)a+(double)c)/(double)b) <= 1.61903;
-//        else if(a == b)
+        if(b == c)
+            return (((double)b+(double)c)/(double)a) >= 1.61703 && (((double)b+(double)c)/(double)a) <= 1.61903;
+        else if(a == c)
+            return (((double)a+(double)c)/(double)b) >= 1.61703 && (((double)a+(double)c)/(double)b) <= 1.61903;
+        else if(a == b)
             return (((double)a+(double)b)/(double)c) >= 1.61703 && (((double)a+(double)b)/(double)c) <= 1.61903;
+        return false;
     }
 
 //    public static void main(String[] args){
