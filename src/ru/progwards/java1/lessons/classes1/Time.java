@@ -22,6 +22,6 @@ public class Time {
         return hours*60*60+minutes*60+seconds;
     }
     public int secondsBetween(Time time){
-        return time.toSeconds()-this.toSeconds();
+        return this.toSeconds()-time.toSeconds();
     }
 }
