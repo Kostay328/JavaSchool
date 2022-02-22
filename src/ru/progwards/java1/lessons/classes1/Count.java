@@ -10,6 +10,10 @@ public class Count {
         count++;
     }
 
+    public int getCount(){
+        return count;
+    }
+
     public boolean dec(){
         count++;
         return count <= 0;
