@@ -1,20 +1,21 @@
 package ru.progwards.java1.lessons.classes1;
 
 public class Count {
-    static int count;
-    public Count(int count){
+    public Count(int count) {
         this.count = count;
     }
 
-    public static void inc(){
+    int count;
+
+    public void inc(){
         count++;
     }
 
-    public static int getCount(){
+    public int getCount(){
         return count;
     }
 
-    public static boolean dec(){
+    public boolean dec(){
         count = count - 1;
         return count <= 0;
     }
