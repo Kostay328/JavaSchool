@@ -4,6 +4,10 @@ public class Count {
     public Count(int count) {
         this.count = count;
     }
+    public Count() {
+        count = 0;
+    }
+
 
     int count;
 
