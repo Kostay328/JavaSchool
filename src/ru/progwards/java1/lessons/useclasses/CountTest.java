@@ -3,19 +3,34 @@ package ru.progwards.java1.lessons.useclasses;
 public class CountTest {
     public static void testInc(int count){
         Count cnt = new Count();
-        for(int i = 0; i < count; i++){
+        int i_ = -1;
+        for(int i = 0; i < count - 1; i++){
             cnt.inc();
             System.out.print(cnt.getCount() + " ");
+            i_ = i;
         }
-        System.out.println(" ");
+        if(i_ != -1)
+            System.out.println(i_);
         System.out.println("тест inc окончен");
     }
 
     public static void testDec(int count){
         Count cnt = new Count(count);
-        while (!cnt.dec()){
+        int i_ = -1;
+        for(int i = 0; i < count; i++){
+            if(cnt.dec()){
+                if(i_ != -1)
+                    System.out.println(cnt.getCount());
+                System.out.println("count равен 0");
+                break;
+            }else{
+                i_ = i;
+                System.out.print(cnt.getCount() + " ");
+            }
         }
-        System.out.println("count равен 0");
+        if(count <= 0)
+            System.out.println(count-1);
+        System.out.println("тест dec окончен");
     }
 
     public static void main(String[] args) {
