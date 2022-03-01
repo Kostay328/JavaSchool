@@ -10,7 +10,7 @@ public class CountTest {
             i_ = i;
         }
         if(i_ != -1)
-            System.out.println(i_);
+            System.out.println(i_ + 2);
         System.out.println("тест inc окончен");
     }
 
