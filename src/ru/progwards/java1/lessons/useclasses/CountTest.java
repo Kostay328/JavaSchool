@@ -7,6 +7,7 @@ public class CountTest {
             cnt.inc();
             System.out.print(cnt.getCount() + " ");
         }
+        System.out.println(" ");
         System.out.println("тест inc окончен");
     }
 
