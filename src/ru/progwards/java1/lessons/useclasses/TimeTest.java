@@ -5,9 +5,9 @@ public class TimeTest {
         Time time0 = new Time(0, 0, 0);
         System.out.println(time0);
         Time time1 = new Time(1, 2, 3);
-        System.out.println(time0);
+        System.out.println(time1);
         Time time2 = new Time(11, 12, 13);
-        System.out.println(time0);
+        System.out.println(time2);
         System.out.println("в time0 " + time0.toSeconds() + " секунд");
         System.out.println("в time1 " + time1.toSeconds() + " секунд");
         System.out.println("в time2 " + time2.toSeconds() + " секунд");
