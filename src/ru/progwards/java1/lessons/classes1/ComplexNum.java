@@ -22,13 +22,13 @@ public class ComplexNum {
         return new ComplexNum(a1, b1);
     }
     public ComplexNum mul(ComplexNum num) {
-        int a1 = a * num.a;
-        int b1 = b * num.b;
+        int a1 = 0;
+        int b1 = b * num.b + a * num.a;
         return new ComplexNum(a1, b1);
     }
     public ComplexNum div(ComplexNum num) {
         int a1 = a / num.a;
-        int b1 = b / num.b;
+        int b1 = 0;
         return new ComplexNum(a1, b1);
     }
 }
