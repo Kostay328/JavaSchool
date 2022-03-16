@@ -14,12 +14,16 @@ public class ZonedTime extends Time{
         return zone;
     }
     public int secondsBetween(Time time) {
+        if(time.getTimeZone()  != null){
+            time.hours = time.hours + time.getTimeZone().hours;
+            time.minutes = time.getTimeZone().hours > 0 ? time.minutes + time.getTimeZone().minutes : time.minutes - time.getTimeZone().minutes;
+        }
         TimeZone tz = getTimeZone();
         if (tz == null)
-            return time.toSeconds() - (this.toSeconds());
+            return this.toSeconds() - time.toSeconds() > 0 ? this.toSeconds() - time.toSeconds() : time.toSeconds() - this.toSeconds();
         else{
             Time t = new Time(this.hours + tz.hours, this.minutes + (tz.hours > 0 ? (tz.minutes) : -(tz.minutes)), this.seconds);
-            return time.toSeconds() - (t.toSeconds());
+            return t.toSeconds() - time.toSeconds() > 0 ? t.toSeconds() - time.toSeconds() : time.toSeconds() - t.toSeconds();
         }
     }
 }
