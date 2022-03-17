@@ -12,6 +12,11 @@ public class CountTest {
         if(i_ != -1)
             System.out.println(i_ + 2 + " ");
         System.out.println("тест inc окончен");
+        System.out.println();
+    }
+
+    public static boolean compare3str(String str1, String str2, String str3){
+        return str1.equals(str2) && str2.equals(str3);
     }
 
     public static void testDec(int count){
