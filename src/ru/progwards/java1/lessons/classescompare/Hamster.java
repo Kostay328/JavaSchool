@@ -20,6 +20,8 @@ public class Hamster extends Animal {
         return 0.06;
     }
 
+
+
     public Hamster(String name) {
         super(name);
     }
