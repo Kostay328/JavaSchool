@@ -10,7 +10,7 @@ public class CountTest {
             i_ = i;
         }
         if(i_ != -1)
-            System.out.println(i_ + 2);
+            System.out.println(i_ + 2 + " ");
         System.out.println("тест inc окончен");
     }
 
@@ -20,7 +20,7 @@ public class CountTest {
         for(int i = 0; i < count; i++){
             if(cnt.dec()){
                 if(i_ != -1)
-                    System.out.println(cnt.getCount());
+                    System.out.println(cnt.getCount() + " ");
                 System.out.println("count равен 0");
                 break;
             }else{
@@ -29,7 +29,7 @@ public class CountTest {
             }
         }
         if(count <= 0)
-            System.out.println(count-1);
+            System.out.println(count-1 + " ");
         System.out.println("тест dec окончен");
     }
 
