@@ -20,4 +20,11 @@ public class Test {
         System.out.println("Цена еды для утки "+d1.calculateFoodPrice());
 
     }
+    public int arraySum2(int[][] m, int n){
+        int res = 0;
+        for (int b:m[n]) {
+            res+=b;
+        }
+        return res;
+    }
 }
