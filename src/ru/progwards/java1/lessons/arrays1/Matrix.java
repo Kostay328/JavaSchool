@@ -2,13 +2,20 @@ package ru.progwards.java1.lessons.arrays1;
 
 public class Matrix {
     private int[][] matrix;
+
+    public static void main(String[] args) {
+        Matrix m = new Matrix(new int[][]{{100, 200, 300}, {3, 4, 5}, {6, 7, 8}});
+        System.out.println(m.maxInRow(2));
+        System.out.println(m.maxInCol(1));
+        System.out.println(m.max());
+    }
     public Matrix(int[][] matrix){
         this.matrix = matrix;
     }
 
     public int maxInRow(int num){
         int res = 0;
-        int[] f = matrix[num];
+        int[] f = matrix[num-1];
         for (int i = 0; f.length > i; i++) {
             if(f[i] > res)
                 res=f[i];
@@ -19,18 +26,31 @@ public class Matrix {
     public int maxInCol(int num){
         int res = 0;
         for (int[] i:matrix) {
-            if(i.length > num && i[num] > res)
-                res=i[num];
+            if(i.length >= num && i[num-1] > res)
+                res=i[num-1];
         }
         return res;
     }
     public int max(){
-        return 0;
+        int res = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            i++;
+            if(res < maxInRow(i))
+                res = maxInRow(i);
+        }
+        return res;
     }
     public boolean isMatrix(){
-        return false;
+        if(matrix.length < 2)
+            return true;
+        int prev = matrix[0].length;
+        for (int[] i:matrix) {
+            if(prev != i.length)
+                return false;
+        }
+        return true;
     }
     public int[][] transposition(){
-        return new int[93][75];
+        return new int[2][2];
     }
 }
