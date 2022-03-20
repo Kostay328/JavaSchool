@@ -55,10 +55,11 @@ public class Matrix {
         return true;
     }
     public int[][] transposition(){
+        if(!isMatrix())
+            return null;
         int[][] res = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = i+1; j < matrix[0].length; j++) {
-                res[i][j] = matrix[j][i];
+            for (int j = 0; j < matrix[i].length; j++) {
                 res[j][i] = matrix[i][j];
             }
         }
