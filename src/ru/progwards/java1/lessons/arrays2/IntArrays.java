@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.arrays2;
 
+import java.util.Arrays;
+
 public class IntArrays {
     public static String toString(int []a){
         String res = "[";
@@ -33,6 +35,12 @@ public class IntArrays {
                     return false;
         }catch (Exception e){}
         return true;
+    }
+
+    public static boolean equals2(int[] a1, int[] a2) {
+        Arrays.sort(a1);
+        Arrays.sort(a2);
+        return Arrays.equals(a1, a2);
     }
 }
 
