@@ -8,7 +8,7 @@ public class IntArrays {
         int i = 0;
         for (; i < a.length - 1; i++)
             res += a[i] + ", ";
-        res += a[i+1] + "]";
+        res += a[i] + "]";
         return res;
     }
 
