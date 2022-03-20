@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.arrays1;
 
+import java.util.Arrays;
+
 public class Matrix {
     private int[][] matrix;
 
@@ -53,6 +55,11 @@ public class Matrix {
                 return false;
         }
         return true;
+    }
+
+    static String sortAndToString(int[] a){
+        Arrays.sort(a);
+        return Arrays.toString(a);
     }
     public int[][] transposition(){
         if(!isMatrix())
