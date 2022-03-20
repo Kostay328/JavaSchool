@@ -15,7 +15,7 @@ public class Matrix {
 
     public int maxInRow(int num){
         int res = 0;
-        int[] f = matrix[num-1];
+        int[] f = matrix[num];
         for (int i = 0; f.length > i; i++) {
             if(f[i] > res)
                 res=f[i];
@@ -26,15 +26,14 @@ public class Matrix {
     public int maxInCol(int num){
         int res = 0;
         for (int[] i:matrix) {
-            if(i.length >= num && i[num-1] > res)
-                res=i[num-1];
+            if(i.length >= num && i[num] > res)
+                res=i[num];
         }
         return res;
     }
     public int max(){
         int res = 0;
         for (int i = 0; i < matrix.length; i++) {
-            i++;
             if(res < maxInRow(i))
                 res = maxInRow(i);
         }
