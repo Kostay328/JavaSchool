@@ -27,10 +27,12 @@ public class Matrix {
 
     public int maxInCol(int num){
         int res = -2147483648;
-        for (int[] i:matrix) {
-            if(i.length >= num && i[num] > res)
-                res=i[num];
-        }
+        try {
+            for (int[] i:matrix) {
+                if(i.length >= num && i[num] > res)
+                    res=i[num];
+            }
+        }catch (Exception e){}
         return res;
     }
     public int max(){
