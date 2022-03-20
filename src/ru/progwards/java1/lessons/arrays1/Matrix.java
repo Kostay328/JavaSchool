@@ -29,8 +29,8 @@ public class Matrix {
         int res = -2147483648;
         try {
             for (int[] i:matrix) {
-                if(i.length >= num && i[num+1] > res)
-                    res=i[num+1];
+                if(i.length > num && i[num] > res)
+                    res=i[num];
             }
         }catch (Exception e){}
         return res;
