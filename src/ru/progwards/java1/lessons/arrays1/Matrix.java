@@ -8,6 +8,7 @@ public class Matrix {
         System.out.println(m.maxInRow(2));
         System.out.println(m.maxInCol(1));
         System.out.println(m.max());
+        System.out.println(m.transposition());
     }
     public Matrix(int[][] matrix){
         this.matrix = matrix;
@@ -54,6 +55,13 @@ public class Matrix {
         return true;
     }
     public int[][] transposition(){
-        return new int[2][2];
+        int[][] res = new int[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = i+1; j < matrix[0].length; j++) {
+                res[i][j] = matrix[j][i];
+                res[j][i] = matrix[i][j];
+            }
+        }
+        return res;
     }
 }
