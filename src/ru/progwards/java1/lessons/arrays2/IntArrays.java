@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.arrays2;
 public class IntArrays {
     public static String toString(int []a){
         String res = "[";
-        for (int i = 0; i < a.length - 1; i++)
+        for (int i = 0; i <= a.length - 1; i++)
             res += a[i] + ", ";
         res += "]";
         return res;
@@ -31,7 +31,6 @@ public class IntArrays {
             for(int i = 0; i < a1.length; i++)
                 if(a1[i] != a2[i])
                     return false;
-
         }catch (Exception e){}
         return true;
     }
