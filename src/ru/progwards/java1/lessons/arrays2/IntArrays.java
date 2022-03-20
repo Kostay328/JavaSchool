@@ -5,9 +5,10 @@ import java.util.Arrays;
 public class IntArrays {
     public static String toString(int []a){
         String res = "[";
-        for (int i = 0; i <= a.length - 1; i++)
+        int i = 0;
+        for (; i < a.length - 1; i++)
             res += a[i] + ", ";
-        res += "]";
+        res += a[i+1] + "]";
         return res;
     }
 
