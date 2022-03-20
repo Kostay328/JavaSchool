@@ -15,11 +15,13 @@ public class Matrix {
 
     public int maxInRow(int num){
         int res = -2147483648;
-        int[] f = matrix[num];
-        for (int i = 0; f.length > i; i++) {
-            if(f[i] > res)
-                res=f[i];
-        }
+        try {
+            int[] f = matrix[num];
+            for (int j : f) {
+                if (j > res)
+                    res = j;
+            }
+        }catch (Exception e){}
         return res;
     }
 
