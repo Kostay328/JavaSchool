@@ -1,9 +1,7 @@
 package ru.progwards.java1.lessons.arrays2;
 
-import java.util.Arrays;
-
 public class DIntArray {
-    private int[] array;
+    private int[] array = new int[5];
 
     public DIntArray() {
     }
