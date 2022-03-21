@@ -1,9 +1,23 @@
 package ru.progwards.java1.lessons.arrays2;
 
 public class DIntArray {
-    private int[] array = new int[5];
+    private int[] array = new int[0];
 
-    public DIntArray() {
+    public DIntArray() { }
+
+    public static void main(String[] args) {
+        DIntArray dir = new DIntArray();
+        dir.add(89);
+        dir.add(97);
+        dir.add(-8);
+        dir.add(70);
+        dir.add(76);
+        dir.add(19);
+        dir.add(17);
+        dir.add(-88);
+        dir.add(-8);
+        dir.add(60);
+        System.out.println(dir.at(0));
     }
 
     public DIntArray(int[] array) {
