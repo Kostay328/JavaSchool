@@ -5,6 +5,9 @@ import java.util.Arrays;
 public class DIntArray {
     private int[] array;
 
+    public DIntArray() {
+    }
+
     public DIntArray(int[] array) {
         this.array = array;
     }
