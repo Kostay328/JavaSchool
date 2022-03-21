@@ -10,7 +10,7 @@ public class DIntArray {
     }
 
     public void add(int num){
-        int[] tmp = new int[array.length];
+        int[] tmp = new int[array.length + 1];
         System.arraycopy(array, 0, tmp, 0, array.length);
         tmp[array.length] = num;
         array = tmp;
@@ -20,23 +20,15 @@ public class DIntArray {
         System.arraycopy(array,0,tmp,0,pos);
         tmp[pos-1] = num;
         System.arraycopy(array, pos, tmp, pos,array.length-pos);
-//        int[] tmp = new int[array.length];
-//        for (Integer i = 0; array.length > i; i++) {
-//            int posCompare = i.compareTo(pos);
-//            if(posCompare == 0)
-//                tmp[i] = num;
-//            else if(posCompare > 0)
-//                tmp[i+1] = array[i];
-//            else
-//                tmp[i] = array[i];
-//        }
-//        array = tmp;
         array = tmp;
     }
     public void atDelete(int pos){
-
+        int[] tmp = new int[array.length - 1];
+        System.arraycopy(array,0,tmp,0,pos);
+        System.arraycopy(array, pos, tmp, pos,array.length-(pos+1));
+        array = tmp;
     }
     public int at(int pos){
-        return 0;
+        return array[pos];
     }
 }
