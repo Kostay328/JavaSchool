@@ -47,6 +47,22 @@ class Figure {
 }
 
 public class Main {
+    public interface Comparable<T> {
+        public int compareTo(T o);
+    }
+class Num implements Comparable{
+    int num;
+
+    public Num(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Num i = (Num) o;
+        return Integer.compare(num,i.num);
+    }
+}
 
 
     public static void main(String[] args) {
