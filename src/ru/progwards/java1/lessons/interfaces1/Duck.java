@@ -24,7 +24,7 @@ public class Duck extends Animal {
         super(name);
     }
     @Override
-    public Color getColor() {
-        return Color.GRAY;
+    public Color1 getColor() {
+        return Color1.GRAY;
     }
 }

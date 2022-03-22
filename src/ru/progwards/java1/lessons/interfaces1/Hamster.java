@@ -24,8 +24,8 @@ public class Hamster extends Animal {
         super(name);
     }
     @Override
-    public Color getColor() {
-        return Color.BEIGE;
+    public Color1 getColor() {
+        return Color1.BEIGE;
     }
 }
 

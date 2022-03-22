@@ -55,7 +55,7 @@ abstract public class Animal implements IColor, Comparable<Animal>{
     abstract String kind();
 
     abstract String say();
-    public abstract Color getColor();
+    public abstract Color1 getColor();
     public String toString(){
         return "Это " + kind() + " " + name + " " + weight + " " + getColor();
     }

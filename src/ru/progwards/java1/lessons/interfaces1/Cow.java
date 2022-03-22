@@ -25,7 +25,7 @@ public class Cow extends Animal {
     }
 
     @Override
-    public Color getColor() {
-        return Color.RED;
+    public Color1 getColor() {
+        return Color1.RED;
     }
 }
