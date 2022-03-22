@@ -1,5 +1,5 @@
 package ru.progwards.java1.lessons.interfaces1;
 
 public interface IColor {
-    public Color1 getColor();
+    public Color getColor();
 }
