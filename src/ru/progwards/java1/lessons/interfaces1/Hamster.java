@@ -23,6 +23,11 @@ public class Hamster extends Animal {
     public Hamster(String name) {
         super(name);
     }
+
+    public Hamster(String name, double weight) {
+        super(name, weight);
+    }
+
     @Override
     public Color getColor() {
         return Color.BEIGE;

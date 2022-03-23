@@ -24,6 +24,10 @@ public class Duck extends Animal {
         super(name);
     }
 
+    public Duck(String name, double weight) {
+        super(name, weight);
+    }
+
     @Override
     public Color getColor() {
         return Color.GRAY;

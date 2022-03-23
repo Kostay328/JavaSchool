@@ -24,6 +24,10 @@ public class Cow extends Animal {
         super(name);
     }
 
+    public Cow(String name, double weight) {
+        super(name, weight);
+    }
+
     @Override
     public Color getColor() {
         return Color.RED;

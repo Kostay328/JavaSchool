@@ -19,4 +19,24 @@ public class ArraySort {
             }
         }
     }
+
+    public static void main(String[] args) {
+        Hamster h1 = new Hamster("Поликарп");
+        h1.setWeight(5);
+        Hamster h2 = new Hamster("Поликарп");
+        h2.setWeight(6);
+        Duck d1 = new Duck("Поликарп");
+        d1.setWeight(15);
+        Animal[] al = new Animal[3];
+        al[0] = d1;
+        al[1] = h2;
+        al[2] = h1;
+        System.out.println(al[0]);
+        System.out.println(al[1]);
+        System.out.println(al[2]);
+        sort(al);
+        System.out.println(al[0]);
+        System.out.println(al[1]);
+        System.out.println(al[2]);
+    }
 }
