@@ -8,7 +8,7 @@ public class FloatNumber {
     public FloatNumber(boolean sign, long mantissa, int exp) {
         this.sign = sign;
         this.mantissa = mantissa;
-        this.exp = exp;
+        this.exp = exp-1;
     }
 
     FloatNumber(String num){
