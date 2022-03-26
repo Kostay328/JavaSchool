@@ -8,7 +8,7 @@ public class FloatNumber {
     public FloatNumber(boolean sign, long mantissa, int exp) {
         this.sign = sign;
         this.mantissa = mantissa;
-        this.exp = exp-1;
+        this.exp = exp+1;
     }
 
     FloatNumber(String num){
@@ -55,7 +55,7 @@ public class FloatNumber {
     }
 
     void fromDouble(double num){
-        FloatNumber res = new FloatNumber(String.format("%.3e", num));
+        FloatNumber res = new FloatNumber(Double.toString(num));
         this.sign = res.sign;
         this.mantissa = res.mantissa;
         this.exp = res.exp;
