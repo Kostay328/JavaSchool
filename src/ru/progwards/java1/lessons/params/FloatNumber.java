@@ -30,8 +30,8 @@ public class FloatNumber {
                 break;
             }
         }
-        mantissa = Long.getLong(r);
-        exp = Integer.getInteger(r0);
+        mantissa = Long.parseLong(r);
+        exp = Integer.parseInt(r0);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class FloatNumber {
             res += "-";
         char[] cl = Long.toString(mantissa).toCharArray();
         res += cl[0] + ".";
-        for (int i = 2; i < cl.length; i++){
+        for (int i = 1; i < cl.length; i++){
             res += cl[i];
         }
         if(exp != 0) {
@@ -66,14 +66,20 @@ public class FloatNumber {
     }
 
     FloatNumber add(FloatNumber num){
-        return new FloatNumber(String.format("%.3e", this.toDouble() + num.toDouble()));
+        System.out.println(this.toDouble());
+        System.out.println(num.toString());
+        System.out.println((this.toDouble() - num.toDouble()) + "");
+        return new FloatNumber((this.toDouble() + num.toDouble()) + "");
     }
 
     FloatNumber sub(FloatNumber num){
-        return new FloatNumber(String.format("%.3e", this.toDouble() - num.toDouble()));
+        return new FloatNumber(String.format("%.3E", this.toDouble() - num.toDouble()));
     }
 
     public static void main(String[] args) {
+        FloatNumber fn1 = new FloatNumber("4.67E45");
+        FloatNumber fn2 = new FloatNumber("4.67E55");
+        System.out.println(fn1.add(fn2));
 
     }
 }
