@@ -50,6 +50,27 @@ public class FloatNumber {
         return res;
     }
 
+    double toDouble(){
+        return Double.parseDouble(this.toString());
+    }
+
+    void fromDouble(double num){
+
+    }
+
+    void negative(){
+
+    }
+
+    FloatNumber add(FloatNumber num){
+        return null;
+    }
+
+    FloatNumber sub(FloatNumber num){
+        return null;
+    }
+
     public static void main(String[] args) {
+
     }
 }
