@@ -44,7 +44,7 @@ public class FloatNumber {
         for (int i = 2; i < cl.length; i++){
             res += cl[i];
         }
-        if(exp > 0) {
+        if(exp != 0) {
             res += "E" + exp;
         }
         return res;
@@ -55,19 +55,22 @@ public class FloatNumber {
     }
 
     void fromDouble(double num){
-
+        FloatNumber res = new FloatNumber(String.format("%.3e", num));
+        this.sign = res.sign;
+        this.mantissa = res.mantissa;
+        this.exp = res.exp;
     }
 
     void negative(){
-
+        sign = !sign;
     }
 
     FloatNumber add(FloatNumber num){
-        return null;
+        return new FloatNumber(String.format("%.3e", this.toDouble() + num.toDouble()));
     }
 
     FloatNumber sub(FloatNumber num){
-        return null;
+        return new FloatNumber(String.format("%.3e", this.toDouble() - num.toDouble()));
     }
 
     public static void main(String[] args) {
