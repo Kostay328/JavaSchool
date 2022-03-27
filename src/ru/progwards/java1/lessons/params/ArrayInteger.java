@@ -13,7 +13,7 @@ public class ArrayInteger {
         String reversed = new StringBuffer(value).reverse().toString();
         char[] cl = reversed.toCharArray();
         for (int i = 0; i < cl.length; i++)
-            digits[i] = (byte)cl[i];
+            digits[i] = Byte.parseByte(Character.toString(cl[i]));
     }
 
     @Override
@@ -22,6 +22,7 @@ public class ArrayInteger {
     }
 
     boolean add(ArrayInteger num){
+        byte[] res = new byte[digits.length];
         if(num.digits.length > digits.length) {
             digits = new byte[0];
             return false;
@@ -30,11 +31,12 @@ public class ArrayInteger {
         try {
             for (int i = 0; i < num.digits.length; i++) {
                 if ((num.digits[i] + digits[i] + plus) > 10) {
-                    digits[i] = (byte) (10 - (num.digits[i] + digits[i]));
+                    res[i] = (byte) ((num.digits[i] + digits[i]) - 10);
                     plus = 1;
                 } else {
+                    res[i] = (byte) (digits[i] + num.digits[i] + plus);
                     plus = 0;
-                    digits[i] = (byte) (digits[i] + num.digits[i]);
+
                 }
             }
         }catch (Exception e){
@@ -42,6 +44,17 @@ public class ArrayInteger {
             return false;
 
         }
+        digits = res;
         return true;
+    }
+
+    public static void main(String[] args) {
+        ArrayInteger a = new ArrayInteger(5);
+        a.fromString("65490");
+        ArrayInteger a1 = new ArrayInteger(5);
+        a1.fromString("26761");
+        a.add(a1);
+
+        System.out.println(a);
     }
 }
