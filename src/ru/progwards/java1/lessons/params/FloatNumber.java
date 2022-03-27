@@ -66,14 +66,11 @@ public class FloatNumber {
     }
 
     FloatNumber add(FloatNumber num){
-        System.out.println(this.toDouble());
-        System.out.println(num.toString());
-        System.out.println((this.toDouble() - num.toDouble()) + "");
         return new FloatNumber((this.toDouble() + num.toDouble()) + "");
     }
 
     FloatNumber sub(FloatNumber num){
-        return new FloatNumber(String.format("%.3E", this.toDouble() - num.toDouble()));
+        return new FloatNumber((this.toDouble() - num.toDouble()) + "");
     }
 
     public static void main(String[] args) {
