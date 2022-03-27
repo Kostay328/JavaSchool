@@ -30,8 +30,8 @@ public class ArrayInteger {
         byte plus = 0;
         try {
             for (int i = 0; i < num.digits.length; i++) {
-                if ((num.digits[i] + digits[i] + plus) > 10) {
-                    res[i] = (byte) ((num.digits[i] + digits[i]) - 10);
+                if ((num.digits[i] + digits[i] + plus) >= 10) {
+                    res[i] = (byte) ((num.digits[i] + digits[i] + plus) - 10);
                     plus = 1;
                 } else {
                     res[i] = (byte) (digits[i] + num.digits[i] + plus);
