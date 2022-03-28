@@ -2,11 +2,12 @@ package ru.progwards.java1.lessons.date;
 
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class CalendarPrint {
     public static String getMonthForInt(int num) {
         String month = "wrong";
-        DateFormatSymbols dfs = new DateFormatSymbols();
+        DateFormatSymbols dfs = new DateFormatSymbols(new Locale("ru"));
         String[] months = dfs.getMonths();
         if (num >= 0 && num <= 11 ) {
             month = months[num];
@@ -15,7 +16,7 @@ public class CalendarPrint {
     }
     public static void printMonth(int month, int year){
         System.out.println(year + " " + getMonthForInt(month));
-        System.out.println("пн вт ср чт пт сб вс");
+        System.out.println("ПН ВТ СР ЧТ ПТ СБ ВС");
         LocalDate now = LocalDate.of(year, month, 1);
         int nowMonth = now.getMonthValue();
         int firstWeek = now.getDayOfWeek().getValue();
