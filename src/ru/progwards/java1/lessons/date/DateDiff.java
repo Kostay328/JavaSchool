@@ -109,14 +109,14 @@ public class DateDiff {
                 day -= 1;
                 hours = 24 + hours;
             }
+            if(mon < 0) {
+                year -= 1;
+                mon = 12 + mon;
+            }
             if(day < 0) {
                 mon -= 1;
                 int[] dates = new int[] {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
                 day = dates[mon-1] + day;
-            }
-            if(mon < 0) {
-                year -= 1;
-                mon = 12 + mon;
             }
 
             yearr += year;
