@@ -62,7 +62,7 @@ public class DateDiff {
 
     public static void timeBetween(Date date1, Date date2) {
         int[] a = period(date1, date2);
-        System.out.println("Между date1 и date2 " + a[0] + " лет, " + a[1] + " месяцев, " + a[2] + " дней, " + (a[3]*60 + a[4]) + " минут, " + a[5] + " секунд, " + a[6] + " миллисекунд");
+        System.out.println("Между date1 и date2 " + a[0] + " лет, " + a[1] + " месяцев, " + a[2] + " дней, " + a[3] + " часов, "+a[4]+" минут, " + a[5] + " секунд, " + a[6] + " миллисекунд");
     }
 
     public static void timeToBirthday(Date now, Date birthday){
@@ -79,7 +79,7 @@ public class DateDiff {
         int secondsr = 0;
         int milisecr = 0;
 
-        for (int i = 0; i < events.length; i++) {
+        for (int i = 0; i < events.length-1; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
             String ds1 = sdf.format(events[i]);
             String ds2 = sdf.format(events[i+1]);
