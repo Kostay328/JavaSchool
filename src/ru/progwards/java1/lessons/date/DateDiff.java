@@ -86,7 +86,7 @@ public class DateDiff {
     } catch (ParseException e) {
         e.printStackTrace();
     }
-        System.out.println("До дня рождения " + a[1] + a[0] * 12 + " месяцев, " + a[2] + " дней, " + (a[3]*60 + a[4]) + " минут, " + a[5] + " секунд, " + a[6] + " миллисекунд");
+        System.out.println("До дня рождения " + a[1] + a[0] * 12 + " месяцев, " + a[2] + " дней, " + a[3] + " часов, "+a[4]+" минут, " + a[5] + " секунд, " + a[6] + " миллисекунд");
     }
 
     public static void averageTime(Date[] events){
