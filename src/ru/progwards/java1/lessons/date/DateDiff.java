@@ -71,6 +71,14 @@ public class DateDiff {
     }
 
     public static void averageTime(Date[] events){
+        int n = events.length;
+        Date temp;
+        for (int i = 0; i < n/2; i++) {
+            temp = events[n-i-1];
+            events[n-i-1] = events[i];
+            events[i] = temp;
+        }
+
         int yearr = 0;
         int monr = 0;
         int dayr = 0;

@@ -15,7 +15,7 @@ public class CalendarPrint {
         return month.substring(0, 1).toUpperCase() + month.substring(1);
     }
     public static void printMonth(int month, int year){
-        System.out.println(year + " " + getMonthForInt(month));
+        System.out.println(year + " " + getMonthForInt(month-1));
         System.out.println("ПН ВТ СР ЧТ ПТ СБ ВС");
         LocalDate now = LocalDate.of(year, month, 1);
         int nowMonth = now.getMonthValue();
