@@ -18,7 +18,7 @@ public class CalendarPrint {
         int dayOfMonth = nowMonth;
 
         String blank = "";
-        for(int i = 0; i < firstWeek; i++)
+        for(int i = 0; i <= firstWeek; i++)
             blank += "  ";
 
         System.out.print(blank + now.getDayOfMonth());
@@ -48,6 +48,6 @@ public class CalendarPrint {
     }
 
     public static void main(String[] args) {
-        printMonth(03, 2022);
+        printMonth(11, 2021);
     }
 }
