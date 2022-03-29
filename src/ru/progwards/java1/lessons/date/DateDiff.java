@@ -8,6 +8,11 @@ import java.util.concurrent.TimeUnit;
 
 public class DateDiff {
     public static int[] period(Date date1, Date date2){
+        if(date1.compareTo(date2) < 0){
+            Date temp = date1;
+            date1 = date2;
+            date2 = temp;
+        }
         int[] res = new int[7];
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
         String ds1 = sdf.format(date1);
