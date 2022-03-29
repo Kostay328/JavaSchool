@@ -43,7 +43,7 @@ public class DateDiff {
             day -= 1;
             hours = 24 + hours;
         }
-        if(mon < 0) {
+        while(mon < 0) {
             year -= 1;
             mon = 12 + mon;
         }

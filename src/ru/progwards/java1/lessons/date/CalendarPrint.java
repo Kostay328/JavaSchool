@@ -42,7 +42,7 @@ public class CalendarPrint {
             int week = now.getDayOfWeek().getValue();
             isFirst = week == 7;
             if (week == 7) {
-                System.out.println();
+                System.out.println(" ");
             }
         }
     }
