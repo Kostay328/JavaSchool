@@ -71,18 +71,21 @@ public class DateDiff {
         System.out.println("Между date1 и date2 " + a[0] + " лет, " + a[1] + " месяцев, " + a[2] + " дней, " + a[3] + " часов, "+a[4]+" минут, " + a[5] + " секунд, " + a[6] + " миллисекунд");
     }
 
-    public static void timeToBirthday(Date now, Date birthday) throws ParseException {
+    public static void timeToBirthday(Date now, Date birthday) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
         String ds1 = sdf.format(now);
         String ds2 = sdf.format(birthday);
         String[] dl1 = ds1.split("-");
         String[] dl2 = ds2.split("-");
-        int[] a;
+        int[] a = new int[0];
+        try {
         if(Integer.parseInt(dl1[1]) > Integer.parseInt(dl2[1])) {
             a = period(sdf.parse((Integer.parseInt(dl2[0])-1) + "-" + dl1[1] + "-" + dl1[2] + "-" + dl1[3] + "-" + dl1[4] + "-" + dl1[5] + "-" + dl1[6]), birthday);
         }else
             a = period(sdf.parse(dl2[0] + "-" + dl1[1] + "-" + dl1[2] + "-" + dl1[3] + "-" + dl1[4] + "-" + dl1[5] + "-" + dl1[6]), birthday);
-
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
         System.out.println("До дня рождения " + a[1] + a[0] * 12 + " месяцев, " + a[2] + " дней, " + (a[3]*60 + a[4]) + " минут, " + a[5] + " секунд, " + a[6] + " миллисекунд");
     }
 

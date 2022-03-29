@@ -18,8 +18,8 @@ public class CalendarPrint {
         int dayOfMonth = nowMonth;
 
         String blank = " ";
-        for(int i = 0; i < firstWeek; i++)
-            blank += "  ";
+        for(int i = 0; i < firstWeek-1; i++)
+            blank += "   ";
 
         System.out.print(blank + now.getDayOfMonth());
         boolean firstest = true;
