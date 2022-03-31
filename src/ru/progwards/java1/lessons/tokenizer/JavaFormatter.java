@@ -5,17 +5,17 @@ import java.util.StringTokenizer;
 public class JavaFormatter {
     public static String format(String code){
         String ress = "";
-//         code = "public static void main(String [] args)\n" +
-//                 "   {\n" +
-//                 "     int num = 1234, reversed = 0;\n" +
-//                 "  System.out.println(\"Original Number: \" + num);\n" +
-//                 "    while(num != 0)\n" +
-//                 " {\n" +
-//                 "        int digit = num%10;\n" +
-//                 "        reversed=reversed*10+    digit ;\n" +
-//                 "        num /= 10;\n" +
-//                 "    }\n" +
-//                 "    System.out.println(\"Reversed Number: \" + reversed);}";
+         code = "public static void main(String [] args)\n" +
+                 "   {\n" +
+                 "     int num = 1234, reversed = 0;\n" +
+                 "  System.out.println(\"Original Number: \" + num);\n" +
+                 "    while(num != 0)\n" +
+                 " {\n" +
+                 "        int digit = num%10;\n" +
+                 "        reversed=reversed*10+    digit ;\n" +
+                 "        num /= 10;\n" +
+                 "    }\n" +
+                 "    System.out.println(\"Reversed Number: \" + reversed);}";
          code = code.replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");
          String[] res = new String[code.length()];
          StringTokenizer st = new StringTokenizer(code, "{}\n", true);
@@ -41,9 +41,12 @@ public class JavaFormatter {
                  res[i] = res[i].replace(" [","[");
                  res[i] = res[i].replace(" )",")");
                  if(!res[i].contains("public") && !res[i].contains("private") && !res[i].contains("void") && !res[i].contains("static") && !res[i].contains("public"))
-                    res[i] = res[i].replace(" (","(");
+                     res[i] = res[i].replace("("," (");
+                 else
+                     res[i] = res[i].replace(" (","(");
                  res[i] = res[i].replace(" ;",";");
                  res[i] = res[i].replace(" .",".");
+                 res[i] = res[i].replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ");
 
                  if (res[i].contains("{")) {
                      res[i - 1] = res[i - 1].replace("\n", " ");
