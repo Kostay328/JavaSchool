@@ -39,11 +39,12 @@ public class JavaFormatter {
                  res[i] = res[i].replace("! =","!=");
                  res[i] = res[i].replace(" ]","]");
                  res[i] = res[i].replace(" [","[");
+                 res[i] = res[i].replace("[ ","[");
                  res[i] = res[i].replace(" )",")");
-                 if(!res[i].contains("public") && !res[i].contains("private") && !res[i].contains("void") && !res[i].contains("static") && !res[i].contains("public"))
-                     res[i] = res[i].replace("("," (");
+                 if(!res[i].contains("while") && !res[i].contains("for") && !res[i].contains("if") && !res[i].contains("print") && !res[i].contains("public"))
+                    res[i] = res[i].replace(" (","(");
                  else
-                     res[i] = res[i].replace(" (","(");
+                     res[i] = res[i].replace("("," (");
                  res[i] = res[i].replace(" ;",";");
                  res[i] = res[i].replace(" .",".");
                  res[i] = res[i].replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ");
