@@ -5,42 +5,80 @@ import java.util.StringTokenizer;
 public class JavaFormatter {
     public static String format(String code){
         String ress = "";
-//         code = "public static void main(String[] args)\n" +
-//                "{\n" +
-//                "System.out.println(\"Enter two numbers\");\n" +
-//                "int first = 10;" +
-//                "int second = 20;\n" +
-//                "System.out.println(first + \" \" + second);\n" +
-//                "int sum = first + second;\n" +
-//                "System.out.println(\"The sum is: \" + sum);\n" +
-//                "  }";
-         code = code.replaceAll("  "," ");
+         code = "public static void main(String [] args)\n" +
+                 "   {\n" +
+                 "     int num = 1234, reversed = 0;\n" +
+                 "  System.out.println(\"Original Number: \" + num);\n" +
+                 "    while(num != 0)\n" +
+                 " {\n" +
+                 "        int digit = num%10;\n" +
+                 "        reversed=reversed*10+    digit ;\n" +
+                 "        num /= 10;\n" +
+                 "    }\n" +
+                 "    System.out.println(\"Reversed Number: \" + reversed);}";
+         code = code.replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");
          String[] res = new String[code.length()];
          StringTokenizer st = new StringTokenizer(code, "{}\n", true);
          int teg = 0;
-         for (int i = 0; st.hasMoreTokens(); i++){
-             res[i] = st.nextToken();
-             if(res[i].contains("{")){
-                 res[i-1] = res[i-1].replace("\n", " ");
-                 teg++;
-             }
-             if(res[i].contains("}")){
-                 res[i] = res[i].replace(" ","");
-                 teg--;
-             }
-             if(teg > 0 && !res[i].contains("}") && !res[i].contains("{") && res[i].contains(";")) {
-                 String spaces = "";
-                 for (int j = 0; j < teg; j++)
-                     spaces += "    ";
-                 res[i] = spaces + res[i];
+         for (int i = 0; st.hasMoreTokens();){
+             String nt = st.nextToken();
+             if(nt.replace(" ", "").length() > 0) {
+                 res[i] = nt;
+                 res[i] = res[i].replace("="," = ");
+                 res[i] = res[i].replace("+"," + ");
+                 res[i] = res[i].replace("-"," - ");
+                 res[i] = res[i].replace("*"," * ");
+                 res[i] = res[i].replace("/"," / ");
+                 res[i] = res[i].replace("%"," % ");
+                 res[i] = res[i].replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ").replace("  "," ");
+                 res[i] = res[i].replace("* =","*=");
+                 res[i] = res[i].replace("+ =","+=");
+                 res[i] = res[i].replace("/ =","/=");
+                 res[i] = res[i].replace("- =","-=");
+                 res[i] = res[i].replace("% =","%=");
+                 res[i] = res[i].replace(" ;",";");
+
+                 if (res[i].contains("{")) {
+                     res[i - 1] = res[i - 1].replace("\n", " ");
+                     teg++;
+                 }
+
+                 int prevTeg = teg ;
+                 if (res[i].contains("}")) {
+                     res[i] = res[i].replace(" ", "");
+                     teg--;
+                 }
+                 if(res[i].contains("}")) {
+                     if (!res[i-1].contains("\n") && (!res[i].trim().equals("}") || !res[i].contains("\n"))) {
+                         res[i] = res[i].replace("}", "\n}");
+                     }
+                 }
+
+                 if (teg > 0 && !res[i].replace(" ", "").replace("\n", "").equals("{") && res[i].replace(" ", "").replace("\n", "").length() > 0) {
+                     String spaces = "";
+                     int lstj = 0;
+                     for (int j = 0; j < prevTeg; j++){
+                         if(res[i].contains("}")){
+                             if(j+1 < prevTeg)
+                                spaces += "    ";
+                         }else
+                            spaces += "    ";
+                         lstj=j;
+                     }
+                     if(lstj+1 < prevTeg)
+                         res[i] = spaces + res[i].trim();
+                     else
+                         res[i] = spaces + res[i];
+                 }
+                 i++;
              }
          }
         for (String rl:res) {
             if(rl == null)
                 break;
-            ress += rl;
+            ress += rl.replace("     ", "    ");
         }
-        return ress.replaceAll(" }","}");
+        return ress;
     }
 
     public static void main(String[] args) {
