@@ -40,8 +40,10 @@ public class JavaFormatter {
                  res[i] = res[i].replace(" ]","]");
                  res[i] = res[i].replace(" [","[");
                  res[i] = res[i].replace(" )",")");
-                 res[i] = res[i].replace(" (","(");
+                 if(!res[i].contains("public") && !res[i].contains("private") && !res[i].contains("void") && !res[i].contains("static") && !res[i].contains("public"))
+                    res[i] = res[i].replace(" (","(");
                  res[i] = res[i].replace(" ;",";");
+                 res[i] = res[i].replace(" .",".");
 
                  if (res[i].contains("{")) {
                      res[i - 1] = res[i - 1].replace("\n", " ");
