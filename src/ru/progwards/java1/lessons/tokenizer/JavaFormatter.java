@@ -37,7 +37,9 @@ public class JavaFormatter {
                  res[i] = res[i].replace("- =","-=");
                  res[i] = res[i].replace("% =","%=");
                  res[i] = res[i].replace("! =","!=");
+                 res[i] = res[i].replace(" ]","]");
                  res[i] = res[i].replace(" [","[");
+                 res[i] = res[i].replace(" )",")");
                  res[i] = res[i].replace(" (","(");
                  res[i] = res[i].replace(" ;",";");
 
