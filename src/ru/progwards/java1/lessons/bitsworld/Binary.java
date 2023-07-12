@@ -8,18 +8,18 @@ public class Binary {
     }
 
     public String toString() {
-        byte b = 0b1000000;
+        byte b = (byte) 0b00000001;
         int f = num;
         String res = "";
-        for (int i = 0; i<7; i++) {
-            res += (b & f) > 0 ? 1 : 0;
-            f<<=1;
+        for (int i = 0; i<8; i++) {
+            res = ((b & f) > 0 ? 1 : 0) + res;
+            f>>=1;
         }
         return res;
     }
 
 
     public static void main(String[] args) {
-        System.out.println(new Binary((byte) 107).toString());
+        System.out.println(new Binary((byte) 0b01000001).toString());
     }
 }
