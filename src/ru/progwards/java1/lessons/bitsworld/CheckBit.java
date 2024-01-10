@@ -2,19 +2,19 @@ package ru.progwards.java1.lessons.bitsworld;
 
 public class CheckBit {
     public static int checkBit(byte value, int bitNumber) {
-        byte b = 0b0000001;
+        byte b = -127;
         int f = value;
-        int res = 0;
-        for (int i = 0; i<(8-bitNumber); i++) {
-            res = (b & f) > 0 ? 1 : 0;
-            f >>= 1;
-        }
-        return res;
+        f >>= bitNumber;
+        System.out.println(f);
+        return (b & f) > 0 ? 1 : 0;
     }
 
     public static void main(String[] args) {
-        System.out.println(checkBit((byte)-51, 1));
-        System.out.println(checkBit((byte) 86, 0));
-        System.out.println(checkBit((byte) 0b1100010, 3));
+        System.out.println(checkBit((byte) 5, 0));//1
+        System.out.println(checkBit((byte) 114, 3));//0
+        System.out.println(checkBit((byte) -51, 1));//0
+        System.out.println(checkBit((byte) 71, 1));//0
+        System.out.println(checkBit((byte) -127, 7));//1
+        System.out.println(checkBit((byte) 3, 0));//1
     }
 }
