@@ -17,8 +17,8 @@ public class BigAlgebra {
 
     static BigInteger fibonacci(int n) {
         BigInteger[] arr = new BigInteger[n];
-        arr[0] = BigInteger.valueOf(1);
-        arr[1] = BigInteger.valueOf(1);
+        arr[0] = BigInteger.ONE;
+        arr[1] = BigInteger.ONE;
         for (int i = 2; i < arr.length; ++i) {
             arr[i] = arr[i - 1].add(arr[i - 2]);
         }
