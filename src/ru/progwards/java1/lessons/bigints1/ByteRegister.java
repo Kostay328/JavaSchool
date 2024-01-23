@@ -1,9 +1,10 @@
 package ru.progwards.java1.lessons.bigints1;
 
-public class ByteRegister {
+public class ByteRegister extends Register {
     Bit[] myByte;
 
     public ByteRegister() {
+        super(0);
         Bit[] res = new Bit[8];
 
         for (int i = 0; i < res.length; i++) {
@@ -13,6 +14,7 @@ public class ByteRegister {
     }
 
     public ByteRegister(byte value) {
+        super(value);
         String[] byteList = Integer.toString(value, 2).split("");
 
         Bit[] res = new Bit[byteList.length];
