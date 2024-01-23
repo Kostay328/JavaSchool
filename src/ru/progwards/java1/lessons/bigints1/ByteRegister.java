@@ -17,7 +17,7 @@ public class ByteRegister extends Register {
         super(value);
         String[] byteList = Integer.toString(value, 2).split("");
 
-        Bit[] res = new Bit[byteList.length];
+        Bit[] res = new Bit[8];
 
         for (int i = 0; i < byteList.length; i++) {
             res[i] = new Bit(byteList[i].equals("1"));
