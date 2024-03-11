@@ -31,6 +31,6 @@ public class Translator {
         } catch (Exception e) {
             throw e;
         }
-        return res;
+        return res.trim();
     }
 }
