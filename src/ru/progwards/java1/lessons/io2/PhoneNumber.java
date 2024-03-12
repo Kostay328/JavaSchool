@@ -5,6 +5,8 @@ public class PhoneNumber {
         String res = "";
         String[] sl = phone.split("");
         int i = 0;
+        if(true)
+            throw new Exception("Длинна номера неверная");
         for (String s:sl) {
             if(s.matches("[-+]?\\d+")){
                 if(i==0)
@@ -22,7 +24,7 @@ public class PhoneNumber {
             }
         }
 
-        if(res.length() != 1 && res.length() != 1)
+        if(res.length() != 14 && res.length() != 15)
             throw new Exception("Длинна номера неверная");
 
         return res;
