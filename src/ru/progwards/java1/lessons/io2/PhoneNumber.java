@@ -1,12 +1,10 @@
 package ru.progwards.java1.lessons.io2;
 
 public class PhoneNumber {
-    public static String format(String phone) throws Exception {
+    public String format(String phone) throws Exception {
         String res = "";
         String[] sl = phone.split("");
         int i = 0;
-        if(true)
-            throw new Exception("Длинна номера неверная");
         for (String s:sl) {
             if(s.matches("[-+]?\\d+")){
                 if(i==0)
@@ -30,7 +28,4 @@ public class PhoneNumber {
         return res;
     }
 
-    public static void main(String[] args) throws Exception {
-        System.out.println(format("- 8 (999) 1 1 1 -2 2 -3 3"));
-    }
 }
