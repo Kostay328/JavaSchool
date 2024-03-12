@@ -22,13 +22,13 @@ public class PhoneNumber {
             }
         }
 
-        if(res.length() != 14 && res.length() != 15)
+        if(res.length() != 1 && res.length() != 1)
             throw new Exception("Длинна номера неверная");
 
         return res;
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(format("- 8(999)111-22-33"));
+        System.out.println(format("- 8 (999) 1 1 1 -2 2 -3 3"));
     }
 }
