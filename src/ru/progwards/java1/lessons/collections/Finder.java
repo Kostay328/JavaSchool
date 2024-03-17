@@ -4,6 +4,15 @@ import java.util.*;
 
 public class Finder {
 
+    public static Collection<Integer> findMinSumPair(Collection<Integer> numbers) {
+        List<Integer> res = new ArrayList<>();
+
+        res.add(0);
+        res.add(0);
+
+        return res;
+    }
+
     public static Collection<Integer> findLocalMax(Collection<Integer> numbers) {
         List<Integer> nums = new ArrayList<>(numbers);
         List<Integer> lokalMaxRecord = new ArrayList<>();
