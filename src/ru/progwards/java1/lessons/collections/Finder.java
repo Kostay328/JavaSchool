@@ -78,6 +78,12 @@ public class Finder {
                 current = 1;
             }
         }
-        return name + ":" + max;
+        return name + ":" + (max+1);
+    }
+
+    public static void main(String[] args) {
+        String[] s = {"Григорий","Григорий","Григорий","Григорий","Григорий","Григорий","Григорий","Александр","Борис","Василий","Александр","Григорий","Григорий","Александр","Дмитрий","Борис","Александр"};
+        List<String> cs = new ArrayList<>(Arrays.asList(s));
+        System.out.println(findSimilar(cs));
     }
 }
