@@ -4,34 +4,6 @@ import java.util.*;
 
 public class Finder {
 
-    public static Collection<Integer> findMinSumPair(Collection<Integer> numbers) {
-        List<Integer> res = new ArrayList<>();
-        List<Integer> nl = new ArrayList<>(numbers);
-        ListIterator<Integer> iterZero = nl.listIterator();
-        ListIterator<Integer> iterOne = nl.listIterator(1);
-        int nc = iterZero.next();
-        int nn = iterOne.next();
-        int s = nc + nn;
-        int i = 0;
-        int in = 1;
-
-        while (iterOne.hasNext()) {
-            nc = iterZero.next();
-            in = iterOne.next();
-            if ((nc + in) < s) {
-                s = nc + in;
-                i = iterZero.nextIndex() - 1;
-                in = iterOne.nextIndex() - 1;
-            }
-        }
-
-        res.add(i);
-//        res.add(in);
-        res.add(6);
-
-        return res;
-    }
-
     public static Collection<Integer> findLocalMax(Collection<Integer> numbers) {
         List<Integer> nums = new ArrayList<>(numbers);
         List<Integer> lokalMaxRecord = new ArrayList<>();
