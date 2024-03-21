@@ -12,7 +12,7 @@ public class LettersInFile {
              Scanner scanner = new Scanner(reader)) {
 
             while (scanner.hasNextLine()) {
-                String[] split = scanner.nextLine().replaceAll("^[а-яА-ЯёЁa-zA-Z]","").split("");
+                String[] split = scanner.nextLine().replaceAll("[^a-zA-Zа-яА-ЯёЁ]","").split("");
                 resSet.addAll(Arrays.asList(split));
             }
         }
@@ -20,7 +20,6 @@ public class LettersInFile {
         for (String s : resSet) {
             res += s;
         }
-
         return res.trim();
     }
 }
