@@ -5,25 +5,22 @@ import java.util.*;
 
 public class LettersInFile {
     public static String process(String fileName) throws Exception {
-        String resultLine = "";
+        String res = "";
         Set<String> resSet = new TreeSet<>();
 
         try (FileReader reader = new FileReader(fileName);
              Scanner scanner = new Scanner(reader)) {
 
             while (scanner.hasNextLine()) {
-                String[] split = scanner.nextLine().replaceAll("[^a-zA-Zа-яА-Я]"," ").split("");
+                String[] split = scanner.nextLine().replaceAll("^[а-яА-ЯёЁa-zA-Z]","").split("");
                 resSet.addAll(Arrays.asList(split));
             }
         }
 
         for (String s : resSet) {
-            resultLine += s;
+            res += s;
         }
-        return resultLine.trim();
-    }
 
-    public static void main(String[] args) {
-
+        return res.trim();
     }
 }
