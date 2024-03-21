@@ -20,7 +20,7 @@ public class LettersInFile {
         for (String s : resSet) {
             resultLine += s;
         }
-        return resultLine;
+        return resultLine.trim();
     }
 
     public static void main(String[] args) {
