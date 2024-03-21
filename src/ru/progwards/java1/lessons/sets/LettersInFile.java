@@ -12,12 +12,8 @@ public class LettersInFile {
              Scanner scanner = new Scanner(reader)) {
 
             while (scanner.hasNextLine()) {
-                String[] split = scanner.nextLine().split("");
-                for (String s : split) {
-                    if (s.equals("[^A-Za-zА-Яа-я]")) {
-                        resSet.add(s);
-                    }
-                }
+                String[] split = scanner.nextLine().replaceAll("[^a-zA-Zа-яА-Я]"," ").split("");
+                resSet.addAll(Arrays.asList(split));
             }
         }
 
@@ -25,5 +21,9 @@ public class LettersInFile {
             resultLine += s;
         }
         return resultLine;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
