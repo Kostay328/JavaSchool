@@ -43,41 +43,40 @@ public class StackCalc {
 
 class Calculate {
     public static double calculation1() {
-        StackCalc calc1 = new StackCalc();
+        StackCalc calc = new StackCalc();
 
-        calc1.push(2.2);
-        calc1.push(3);
-        calc1.push(12.1);
+        calc.push(2.2);
+        calc.push(3);
+        calc.push(12.1);
+        calc.add();
+        calc.mul();
 
-        calc1.add();
-        calc1.mul();
-
-        return calc1.pop();
+        return calc.pop();
     }
 
     public static double calculation2() {
-        StackCalc calc2 = new StackCalc();
+        StackCalc calc = new StackCalc();
 
-        calc2.push(737.22);
-        calc2.push(24);
-        calc2.add();
-        calc2.push(55.6);
-        calc2.push(12.1);
-        calc2.sub();
-        calc2.div();
-        calc2.push(19);
-        calc2.push(3.33);
-        calc2.sub();
-        calc2.push(87);
-        calc2.push(2);
-        calc2.push(13.001);
-        calc2.push(9.2);
-        calc2.sub();
-        calc2.mul();
-        calc2.add();
-        calc2.mul();
-        calc2.add();
+        calc.push(737.22);
+        calc.push(24);
+        calc.add();
+        calc.push(55.6);
+        calc.push(12.1);
+        calc.sub();
+        calc.div();
+        calc.push(19);
+        calc.push(3.33);
+        calc.sub();
+        calc.push(87);
+        calc.push(2);
+        calc.push(13.001);
+        calc.push(9.2);
+        calc.sub();
+        calc.mul();
+        calc.add();
+        calc.mul();
+        calc.add();
 
-        return calc2.pop();
+        return calc.pop();
     }
 }
