@@ -29,7 +29,7 @@ public class FiboMapCache {
 
     private BigDecimal calculateFibonacci(int n) {
         BigDecimal a = BigDecimal.ONE, b = BigDecimal.ONE;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 3; i <= n; i++) {
             BigDecimal temp = a.add(b);
             a = b;
             b = temp;
