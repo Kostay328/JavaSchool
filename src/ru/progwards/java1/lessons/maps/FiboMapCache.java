@@ -29,7 +29,7 @@ public class FiboMapCache {
 
     private BigDecimal calculateFibonacci(int n) {
         BigDecimal a = BigDecimal.ONE, b = BigDecimal.ONE;
-        for (int i = 2; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             BigDecimal temp = a.add(b);
             a = b;
             b = temp;
@@ -63,7 +63,11 @@ public class FiboMapCache {
         long timeWithoutCache = endTime - startTime;
 
         // Вывод результатов
-        System.out.printf("fiboNumber cacheOn=true время выполнения: %d", timeWithCache);
+        System.out.printf("fiboNumber cacheOn=true время выполнения: %d %n", timeWithCache);
         System.out.printf("fiboNumber cacheOn=false время выполнения: %d", timeWithoutCache);
+    }
+
+    public static void main(String[] args) {
+        test();
     }
 }
