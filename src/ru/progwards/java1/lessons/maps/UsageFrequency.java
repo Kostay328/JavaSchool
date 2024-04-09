@@ -19,15 +19,13 @@ public class UsageFrequency {
     }
 
     private void processLine(String line) {
-        Pattern pattern = Pattern.compile("\\w+|\\p{Punct}|\\p{S}");
+        Pattern pattern = Pattern.compile("\\w+");
         Matcher matcher = pattern.matcher(line);
         while (matcher.find()) {
-            if (matcher.group(0).matches("\\p{IsAlphabetic}")) {
-                for (char c : matcher.group(0).toCharArray()) {
-                    incrementLetterFrequency(c);
-                }
-            } else {
-                incrementWordFrequency(matcher.group(0));
+            String word = matcher.group();
+            incrementWordFrequency(word);
+            for (char c : word.toCharArray()) {
+                incrementLetterFrequency(c);
             }
         }
     }
