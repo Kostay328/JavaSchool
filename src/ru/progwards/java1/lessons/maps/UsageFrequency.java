@@ -9,13 +9,13 @@ public class UsageFrequency {
     private Map<Character, Integer> letterFrequency = new HashMap<>();
     private Map<String, Integer> wordFrequency = new HashMap<>();
 
-    public void processFile(String fileName) throws IOException {
+    public void processFile(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 processLine(line);
             }
-        }
+        }catch (Exception e){}
     }
 
     private void processLine(String line) {
@@ -50,5 +50,9 @@ public class UsageFrequency {
 
     public Map<String, Integer> getWords() {
         return Collections.unmodifiableMap(wordFrequency);
+    }
+
+    public static void main(String[] args) {
+
     }
 }
