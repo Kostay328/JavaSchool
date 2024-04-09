@@ -37,7 +37,7 @@ public class FiboMapCache {
         return b;
     }
 
-    public void clearCache() {
+    public void clearCahe() {
         fiboCache.clear();
     }
 
