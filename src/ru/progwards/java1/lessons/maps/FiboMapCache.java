@@ -47,7 +47,6 @@ public class FiboMapCache {
         FiboMapCache cacheOnTrue = new FiboMapCache(true);
         FiboMapCache cacheOnFalse = new FiboMapCache(false);
 
-        // Расчет чисел Фибоначчи с включенным кэшем
         startTime = System.currentTimeMillis();
         for (int i = 1; i <= 1000; i++) {
             cacheOnTrue.fiboNumber(i);
@@ -55,7 +54,6 @@ public class FiboMapCache {
         endTime = System.currentTimeMillis();
         long timeWithCache = endTime - startTime;
 
-        // Расчет чисел Фибоначчи с отключенным кэшем
         startTime = System.currentTimeMillis();
         for (int i = 1; i <= 1000; i++) {
             cacheOnFalse.fiboNumber(i);
@@ -63,7 +61,6 @@ public class FiboMapCache {
         endTime = System.currentTimeMillis();
         long timeWithoutCache = endTime - startTime;
 
-        // Вывод результатов
         System.out.printf("fiboNumber cacheOn=true время выполнения: %d %n", timeWithCache);
         System.out.printf("fiboNumber cacheOn=false время выполнения: %d", timeWithoutCache);
     }

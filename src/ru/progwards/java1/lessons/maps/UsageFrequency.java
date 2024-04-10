@@ -49,8 +49,4 @@ public class UsageFrequency {
     public Map<String, Integer> getWords() {
         return Collections.unmodifiableMap(wordFrequency);
     }
-
-    public static void main(String[] args) {
-
-    }
 }
