@@ -45,15 +45,15 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-        DateTimeFormatter formatter;
+        DateTimeFormatter dtf;
         switch (style) {
             case SHORT:
                 this.duration = Duration.ofMillis(Long.parseLong(strDuration));
                 break;
             case LONG:
-                formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
-                LocalDateTime ldt = LocalDateTime.parse(strDuration, formatter);
-                LocalDateTime zero = LocalDateTime.MIN;
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
+                LocalDateTime ldt = LocalDateTime.parse(strDuration, dtf);
+                LocalDateTime zero = LocalDateTime.of(0, 1, 1, 0, 0).minusMonths(1).minusDays(1);// есть ли другие варианты?..
                 this.duration = Duration.between(zero, ldt);
                 break;
             default:
