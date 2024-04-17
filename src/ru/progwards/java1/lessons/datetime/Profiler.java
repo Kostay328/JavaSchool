@@ -36,56 +36,56 @@ public class Profiler {
         sectionsList.sort(Comparator.comparing(o -> o.sectionName));
         return sectionsList;
     }
+}
 
-    public static class StatisticInfo {
-        private String sectionName;
-        private int fullTime;
-        private int selfTime;
-        private int count;
+class StatisticInfo {
+    public String sectionName;
+    public int fullTime;
+    public int selfTime;
+    public int count;
 
-        public long lastEnterTime;
-        public long lastExitTime;
-        public long selfTimeCorrection;
+    public long lastEnterTime;
+    public long lastExitTime;
+    public long selfTimeCorrection;
 
-        public StatisticInfo(String sectionName, int fullTime, int selfTime, int count) {
-            this.sectionName = sectionName;
-            this.fullTime = fullTime;
-            this.selfTime = selfTime;
-            this.count = count;
-        }
+    public StatisticInfo(String sectionName, int fullTime, int selfTime, int count) {
+        this.sectionName = sectionName;
+        this.fullTime = fullTime;
+        this.selfTime = selfTime;
+        this.count = count;
+    }
 
-        public StatisticInfo() {
+    public StatisticInfo() {
 
-        }
+    }
 
-        public String getSectionName() {
-            return sectionName;
-        }
+    public String getSectionName() {
+        return sectionName;
+    }
 
-        public int getFullTime() {
-            return fullTime;
-        }
+    public int getFullTime() {
+        return fullTime;
+    }
 
-        public int getSelfTime() {
-            return selfTime;
-        }
+    public int getSelfTime() {
+        return selfTime;
+    }
 
-        public int getCount() {
-            return count;
-        }
+    public int getCount() {
+        return count;
+    }
 
-        public int compareTo(StatisticInfo other) {
-            return this.sectionName.compareTo(other.sectionName);
-        }
+    public int compareTo(StatisticInfo other) {
+        return this.sectionName.compareTo(other.sectionName);
+    }
 
-        @Override
-        public String toString() {
-            return "StatisticInfo{" +
-                    "sectionName='" + sectionName + '\'' +
-                    ", fullTime=" + fullTime +
-                    ", selfTime=" + selfTime +
-                    ", count=" + count +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "StatisticInfo{" +
+                "sectionName='" + sectionName + '\'' +
+                ", fullTime=" + fullTime +
+                ", selfTime=" + selfTime +
+                ", count=" + count +
+                '}';
     }
 }

@@ -1,16 +1,16 @@
 package ru.progwards.java1.lessons.datetime;
 
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Locale;
 
 public class Insurance {
+    public enum FormatStyle {SHORT, LONG, FULL}
     private ZonedDateTime start;
     private Duration duration;
     private ZonedDateTime dateTime = ZonedDateTime.now();
@@ -23,16 +23,17 @@ public class Insurance {
         DateTimeFormatter formatter;
         switch (style) {
             case SHORT:
-                formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+                formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+                this.start = ZonedDateTime.of(LocalDate.parse(strStart, formatter), LocalTime.MIDNIGHT, ZoneId.systemDefault());
                 break;
             case LONG:
-                formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG);
+                formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
+                System.out.println(formatter);
+                this.start = ZonedDateTime.parse(strStart, formatter);
                 break;
-            case FULL:
-                formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown FormatStyle");
+            default: // case: FULL
+                formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                this.start = ZonedDateTime.parse(strStart, formatter);
         }
 
         formatter = formatter.withLocale(Locale.getDefault());
