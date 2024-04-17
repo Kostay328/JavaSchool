@@ -29,7 +29,6 @@ public class Insurance {
                 break;
             case LONG:
                 formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
-                System.out.println(formatter);
                 this.start = ZonedDateTime.parse(strStart, formatter);
                 break;
             default: // case: FULL
@@ -72,7 +71,8 @@ public class Insurance {
     }
 
     public boolean checkValid(ZonedDateTime dateTime) {
-        if (duration.equals(Duration.ZERO) && dateTime.isAfter(start)) return true;
+        if (duration.equals(Duration.ZERO) && dateTime.isAfter(start))
+            return true;
         ZonedDateTime endTime = start.plusHours(duration.toHours());
         return dateTime.isAfter(start) && dateTime.isBefore(endTime);
     }
