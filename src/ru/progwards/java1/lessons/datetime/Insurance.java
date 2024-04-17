@@ -2,12 +2,6 @@ package ru.progwards.java1.lessons.datetime;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Locale;
 
 public class Insurance {
     public enum FormatStyle {SHORT, LONG, FULL}
@@ -17,48 +11,30 @@ public class Insurance {
 
     public Insurance(ZonedDateTime start) {
         this.start = start;
+        setDuration(Duration.ZERO);
     }
 
     public Insurance(String strStart, FormatStyle style) {
-        DateTimeFormatter formatter;
+        DateTimeFormatter dtf;
         switch (style) {
             case SHORT:
-                formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-                this.start = ZonedDateTime.of(LocalDate.parse(strStart, formatter), LocalTime.MIDNIGHT, ZoneId.systemDefault());
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE;
+                this.start = ZonedDateTime.of(LocalDate.parse(strStart, dtf), LocalTime.MIDNIGHT, ZoneId.systemDefault());
                 break;
             case LONG:
-                formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
-                System.out.println(formatter);
-                this.start = ZonedDateTime.parse(strStart, formatter);
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
+                System.out.println(dtf);
+                this.start = ZonedDateTime.parse(strStart, dtf);
                 break;
-            default: // case: FULL
-                formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-                this.start = ZonedDateTime.parse(strStart, formatter);
+            default:
+                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                this.start = ZonedDateTime.parse(strStart, dtf);
         }
-
-        formatter = formatter.withLocale(Locale.getDefault());
-        this.start = ZonedDateTime.parse(strStart, formatter);
+        setDuration(Duration.ZERO);
     }
 
     public void setDuration(Duration duration) {
         this.duration = duration;
-    }
-
-    public void setDuration(String strDuration, FormatStyle style) {
-        DateTimeFormatter formatter;
-        switch (style) {
-            case SHORT:
-                this.duration = Duration.ofMillis(Long.parseLong(strDuration));
-                break;
-            case LONG:
-                formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
-                LocalDateTime ldt = LocalDateTime.parse(strDuration, formatter);
-                LocalDateTime zero = LocalDateTime.MIN;
-                this.duration = Duration.between(zero, ldt);
-                break;
-            default:
-                this.duration = Duration.parse(strDuration);
-        }
     }
 
     public void setDuration(ZonedDateTime expiration) {
@@ -66,15 +42,31 @@ public class Insurance {
     }
 
     public void setDuration(int months, int days, int hours) {
-        ZonedDateTime endDate = start.plusMonths(months).plusDays(days).plusHours(hours);
-        this.duration = Duration.between(start, endDate);
+        ZonedDateTime expiration = start.plusMonths(months).plusDays(days).plusHours(hours);
+        this.duration = Duration.between(start, expiration);
+    }
+
+    public void setDuration(String strDuration, FormatStyle style) {
+        DateTimeFormatter dtf;
+        switch (style) {
+            case SHORT:
+                this.duration = Duration.ofMillis(Long.parseLong(strDuration));
+                break;
+            case LONG:
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
+                LocalDateTime ldt = LocalDateTime.parse(strDuration, dtf);
+                LocalDateTime zero = LocalDateTime.of(0, 1, 1, 0, 0).minusMonths(1).minusDays(1);
+                this.duration = Duration.between(zero, ldt);
+                break;
+            default:
+                this.duration = Duration.parse(strDuration);
+        }
     }
 
     public boolean checkValid(ZonedDateTime dateTime) {
-        if (duration == null) {
-            return true;
-        }
-        return dateTime.isBefore(start.plus(duration));
+        if (duration.equals(Duration.ZERO) && dateTime.isAfter(start)) return true;
+        ZonedDateTime endTime = start.plusHours(duration.toHours());
+        return dateTime.isAfter(start) && dateTime.isBefore(endTime);
     }
 
     public String toString() {
@@ -84,4 +76,5 @@ public class Insurance {
         }
         return "Insurance issued on " + start + validStr;
     }
+
 }
