@@ -83,17 +83,4 @@ public class Insurance {
         }
         return "Insurance issued on " + start + validStr;
     }
-
-    public static void main(String[] args) {
-        //TemporalAccessor: {},ISO,Europe/Moscow resolved to 2023-03-08 of type java.time.format.Parsed
-        TemporalAccessor ta = DateTimeFormatter.ISO_ZONED_DATE_TIME.parse("2023-03-12T18:06:11.940343+03:00[Europe/Moscow]");
-        ZonedDateTime test = ZonedDateTime.from(Instant.now().atZone(ZoneId.systemDefault()));
-        ZonedDateTime test2 = ZonedDateTime.of(2023, 3, 9, 1, 0, 0, 0, ZoneId.systemDefault());
-        Insurance pu = new Insurance("2023-03-14T08:36:12.899241+03:00[Europe/Moscow]", FormatStyle.FULL);
-        Insurance fromTA = new Insurance(ZonedDateTime.from(ta));
-        fromTA.setDuration(0, 0, 1);
-
-        System.out.println(fromTA);
-
-    }
 }
