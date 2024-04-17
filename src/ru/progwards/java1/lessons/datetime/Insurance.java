@@ -21,22 +21,24 @@ public class Insurance {
     }
 
     public Insurance(String strStart, FormatStyle style) {
-        DateTimeFormatter dtf;
+        DateTimeFormatter formatter;
         switch (style) {
             case SHORT:
-                dtf = DateTimeFormatter.ISO_LOCAL_DATE;
-                this.start = ZonedDateTime.of(LocalDate.parse(strStart, dtf), LocalTime.MIDNIGHT, ZoneId.systemDefault());
+                formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+                this.start = ZonedDateTime.of(LocalDate.parse(strStart, formatter), LocalTime.MIDNIGHT, ZoneId.systemDefault());
                 break;
             case LONG:
-                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
-                System.out.println(dtf);
-                this.start = ZonedDateTime.parse(strStart, dtf);
+                formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
+                System.out.println(formatter);
+                this.start = ZonedDateTime.parse(strStart, formatter);
                 break;
             default: // case: FULL
-                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-                this.start = ZonedDateTime.parse(strStart, dtf);
+                formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                this.start = ZonedDateTime.parse(strStart, formatter);
         }
-        setDuration(Duration.ZERO);
+
+        formatter = formatter.withLocale(Locale.getDefault());
+        this.start = ZonedDateTime.parse(strStart, formatter);
     }
 
     public void setDuration(Duration duration) {
@@ -70,10 +72,9 @@ public class Insurance {
     }
 
     public boolean checkValid(ZonedDateTime dateTime) {
-        if (duration == null) {
-            return true;
-        }
-        return dateTime.isBefore(start.plus(duration));
+        if (duration.equals(Duration.ZERO) && dateTime.isAfter(start)) return true;
+        ZonedDateTime endTime = start.plusHours(duration.toHours());
+        return dateTime.isAfter(start) && dateTime.isBefore(endTime);
     }
 
     public String toString() {
@@ -82,6 +83,5 @@ public class Insurance {
             validStr = " is valid";
         }
         return "Insurance issued on " + start + validStr;
-
     }
 }
