@@ -21,24 +21,24 @@ public class Insurance {
     }
 
     public Insurance(String strStart, FormatStyle style) {
-        DateTimeFormatter formatter;
+        DateTimeFormatter dtf;
         switch (style) {
             case SHORT:
-                formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-                this.start = ZonedDateTime.of(LocalDate.parse(strStart, formatter), LocalTime.MIDNIGHT, ZoneId.systemDefault());
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE;
+                this.start = ZonedDateTime.of(LocalDate.parse(strStart, dtf), LocalTime.MIDNIGHT, ZoneId.systemDefault());
                 break;
             case LONG:
-                formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
-                this.start = ZonedDateTime.parse(strStart, formatter);
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault());
+                System.out.println(dtf);
+                this.start = ZonedDateTime.parse(strStart, dtf);
                 break;
             default: // case: FULL
-                formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-                this.start = ZonedDateTime.parse(strStart, formatter);
+                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                this.start = ZonedDateTime.parse(strStart, dtf);
         }
-
-        formatter = formatter.withLocale(Locale.getDefault());
-        this.start = ZonedDateTime.parse(strStart, formatter);
+        setDuration(Duration.ZERO);
     }
+
 
     public void setDuration(Duration duration) {
         this.duration = duration;
