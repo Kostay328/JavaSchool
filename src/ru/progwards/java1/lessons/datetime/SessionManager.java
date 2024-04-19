@@ -5,47 +5,47 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class SessionManager {
-    private Map<Integer, UserSession> sessions; // Хранение сессий по userName
-    private int sessionValid; // Время валидности сессии в секундах
+
+    private int sessionValid;
+    private Map<Integer, UserSession> sessionMap; // private <коллекция> sessions;
 
     public SessionManager(int sessionValid) {
-        this.sessions = new HashMap<>();
         this.sessionValid = sessionValid;
+        sessionMap = new HashMap<>();
     }
 
     public void add(UserSession userSession) {
-        sessions.put(userSession.getSessionHandle(), userSession);
+        sessionMap.put(userSession.getSessionHandle(), userSession);
     }
+
     public UserSession find(String userName) {
-        for (UserSession session : sessions.values()) {
-            if (session.getUserName().equals(userName)) {
-                session.updateLastAccess();
-                return session;
+        for (UserSession s : sessionMap.values()) {
+            if (s.getUserName().equals(userName)) {
+                return get(s.getSessionHandle());
             }
         }
         return null;
     }
 
     public UserSession get(int sessionHandle) {
-        for (UserSession session : sessions.values()) {
-            if (session.getSessionHandle() == sessionHandle) {
-                session.updateLastAccess(); // Обновить время доступа
-                return session;
-            }
+        UserSession session = sessionMap.get(sessionHandle);
+        if (session == null || Duration.between(session.getLastAccess(), LocalDateTime.now()).toSeconds() >= sessionValid) {
+            return null;
         }
-        return null;
+        session.updateLastAccess();
+        return session;
     }
 
     public void delete(int sessionHandle) {
-        sessions.remove(sessionHandle);
+        sessionMap.remove(sessionHandle);
     }
 
     public void deleteExpired() {
         LocalDateTime now = LocalDateTime.now();
-        Collection<UserSession> currentSessions = new ArrayList<>(sessions.values());
+        Collection<UserSession> currentSessions = new ArrayList<>(sessionMap.values());
         for (UserSession s : currentSessions) {
             if (Duration.between(s.getLastAccess(), now).toSeconds() >= sessionValid) {
-                sessions.remove(s.getSessionHandle());
+                sessionMap.remove(s.getSessionHandle());
             }
         }
     }
@@ -54,7 +54,7 @@ public class SessionManager {
 class UserSession {
     private int sessionHandle;
     private String userName;
-    private LocalDateTime lastAccess;
+    private LocalDateTime lastAccess;//<дата-время>
 
     private static Random random = new Random();
 
