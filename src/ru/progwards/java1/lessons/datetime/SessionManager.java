@@ -5,9 +5,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class SessionManager {
-
     private int sessionValid;
-    private Map<Integer, UserSession> sessionMap; // private <коллекция> sessions;
+    private Map<Integer, UserSession> sessionMap;
 
     public SessionManager(int sessionValid) {
         this.sessionValid = sessionValid;
