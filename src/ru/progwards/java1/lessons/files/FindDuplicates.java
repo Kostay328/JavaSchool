@@ -22,7 +22,6 @@ public class FindDuplicates {
                     for (List<String> duplicate : duplicates) {
                         if (duplicate.get(0).equals(fileName) &&
                                 duplicate.get(1).equals(String.valueOf(attrs.size())) &&
-                                duplicate.get(2).equals(attrs.lastModifiedTime() + "") &&
                                 Objects.equals(fileContent, new String(Files.readAllBytes(Paths.get(duplicate.get(3)))))) {
                             // Если дубликат найден, добавляем текущий путь к списку дубликатов
                             duplicate.add(filePath);
@@ -32,10 +31,6 @@ public class FindDuplicates {
 
                     // Если дубликат не найден, создаем новый список для хранения информации о дубликате
                     List<String> newDuplicate = new ArrayList<>();
-                    newDuplicate.add(fileName);
-                    newDuplicate.add(String.valueOf(attrs.size()));
-                    newDuplicate.add(attrs.lastModifiedTime() + "");
-                    newDuplicate.add(filePath);
                     duplicates.add(newDuplicate);
 
                     return FileVisitResult.CONTINUE;
