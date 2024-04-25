@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class FilesSelect {
-    public static List<List<String>> findDuplicates(String startPath) {
+    public List<List<String>> findDuplicates(String startPath) {
         try {
             List<List<String>> duplicates = new ArrayList<>();
             Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<Path>() {
@@ -45,16 +45,6 @@ public class FilesSelect {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    public static void main(String[] args) {
-        List<List<String>> duplicates = findDuplicates("path/to/your/directory");
-        for (List<String> duplicate : duplicates) {
-            System.out.println("Duplicate files:");
-            for (String filePath : duplicate) {
-                System.out.println(filePath);
-            }
         }
     }
 }
