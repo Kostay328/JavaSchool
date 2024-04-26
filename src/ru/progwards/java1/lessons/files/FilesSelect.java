@@ -1,50 +1,55 @@
 package ru.progwards.java1.lessons.files;
 
 import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 
 public class FilesSelect {
-    public String findDuplicates(String startPath) {
+    public void selectFiles(String inFolder, String outFolder, List<String> keys) {
+        Path inPath = Paths.get(inFolder);
+        if (!Files.exists(inPath)) {
+            return;
+        }
+
+        Path outPath = Paths.get(outFolder);
+        if (!Files.exists(outPath)) {
+            try {
+                Files.createDirectory(outPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+
         try {
-            List<List<String>> duplicates = new ArrayList<>();
-            Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<Path>() {
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    String filePath = file.toString();
-                    String fileName = filePath.substring(startPath.length() + 1); // Получаем имя файла
-                    String fileContent = new String(Files.readAllBytes(file));
+            Files.walk(inPath)
+                    .filter(path -> path.toString().endsWith(".txt"))
+                    .forEach(path -> {
+                        try {
+                            String content = new String(Files.readAllBytes(path));
 
-                    // Проверяем, есть ли уже дубликаты с таким же именем, размером, датой и содержимым
-                    for (List<String> duplicate : duplicates) {
-                        if (duplicate.get(0).equals(fileName) &&
-                                duplicate.get(1).equals(String.valueOf(attrs.size())) &&
-                                duplicate.get(2).equals(attrs.lastModifiedTime() + "") &&
-                                Objects.equals(fileContent, new String(Files.readAllBytes(Paths.get(duplicate.get(3)))))) {
-                            // Если дубликат найден, добавляем текущий путь к списку дубликатов
-                            duplicate.add(filePath);
-                            return FileVisitResult.CONTINUE;
+                            for (String key : keys) {
+                                if (content.contains(key)) {
+
+                                    Path subFolderPath = outPath.resolve(key);
+                                    if (!Files.exists(subFolderPath)) {
+                                        Files.createDirectory(subFolderPath);
+                                    }
+
+                                    Path targetPath = subFolderPath.resolve(path.getFileName());
+                                    Files.copy(path, targetPath);
+                                    System.out.println("Файл " + path + " скопирован в " + targetPath);
+                                    break;
+                                }
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    }
-
-                    // Если дубликат не найден, создаем новый список для хранения информации о дубликате
-                    List<String> newDuplicate = new ArrayList<>();
-                    newDuplicate.add(fileName);
-                    newDuplicate.add(String.valueOf(attrs.size()));
-                    newDuplicate.add(attrs.lastModifiedTime() + "");
-                    newDuplicate.add(filePath);
-                    duplicates.add(newDuplicate);
-
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-            return duplicates.toString();
+                    });
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 }
