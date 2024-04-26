@@ -91,40 +91,39 @@ public class OrderProcessor {
         return orders.values().stream()
         .collect(Collectors.groupingBy(o -> o.datetime.toLocalDate(), Collectors.summingDouble(o -> o.sum)));
     }
+}
+class Order {
+    public String shopId;
+    public String orderId;
+    public String customerId;
+    public LocalDateTime datetime;
+    public List<OrderItem> items;
+    public double sum;
 
-    public class Order {
-        public String shopId;
-        public String orderId;
-        public String customerId;
-        public LocalDateTime datetime;
-        public List<OrderItem> items;
-        public double sum;
-
-        public Order(String shopId, String orderId, String customerId, LocalDateTime datetime) {
-            this.shopId = shopId;
-            this.orderId = orderId;
-            this.customerId = customerId;
-            this.datetime = datetime;
-            this.items = new ArrayList<>();
-            this.sum = 0;
-        }
-
-        public void addItem(OrderItem item) {
-            items.add(item);
-            sum += item.price * item.count;
-        }
+    public Order(String shopId, String orderId, String customerId, LocalDateTime datetime) {
+        this.shopId = shopId;
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.datetime = datetime;
+        this.items = new ArrayList<>();
+        this.sum = 0;
     }
 
-    public class OrderItem {
-        public String goodsName;
-        public int count;
-        public double price;
+    public void addItem(OrderItem item) {
+        items.add(item);
+        sum += item.price * item.count;
+    }
+}
 
-        public OrderItem(String goodsName, int count, double price) {
-            this.goodsName = goodsName;
-            this.count = count;
-            this.price = price;
-        }
+class OrderItem {
+    public String goodsName;
+    public int count;
+    public double price;
+
+    public OrderItem(String goodsName, int count, double price) {
+        this.goodsName = goodsName;
+        this.count = count;
+        this.price = price;
     }
 }
 
