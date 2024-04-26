@@ -9,10 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FindDuplicates {
-    public List<List<String>> findDuplicates(String startPath) throws IOException {
+    public List<List<String>> findDuplicates(String startPath) {
         List<List<String>> res = new ArrayList<>();
         List<FileData> fdl = new ArrayList<>();
-
+    try{
         Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
@@ -35,6 +35,7 @@ public class FindDuplicates {
                 return FileVisitResult.CONTINUE;
             }
         });
+    }catch (IOException e){}
 
         for (int i = 0; i < fdl.size(); i++) {
             for (int j = i + 1; j < fdl.size(); ) {
