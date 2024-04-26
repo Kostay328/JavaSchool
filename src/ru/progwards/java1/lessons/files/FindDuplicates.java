@@ -12,8 +12,8 @@ public class FindDuplicates {
     public List<List<String>> findDuplicates(String startPath) {
         List<List<String>> res = new ArrayList<>();
         List<FileData> fdl = new ArrayList<>();
-    try{
-        Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<Path>() {
+    try {
+        Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                 File fileStr = new File(file.toString());
@@ -55,10 +55,15 @@ public class FindDuplicates {
         return res;
     }
 
-    private boolean compareFileData(FileData fd1, FileData fd2) throws IOException {
+    private boolean compareFileData(FileData fd1, FileData fd2) {
         if (!fd1.name.equals(fd2.name) || fd1.length != fd2.length || fd1.lastModified != fd2.lastModified)
             return false;
-        return Arrays.equals(Files.readAllBytes(fd1.path), Files.readAllBytes(fd2.path));
+
+        try {
+            return Arrays.equals(Files.readAllBytes(fd1.path), Files.readAllBytes(fd2.path));
+        }catch (IOException e) {
+            return false;
+        }
     }
 }
 class FileData {
