@@ -83,7 +83,7 @@ public class OrderProcessor {
 
     public Map<String, Double> statisticsByGoods() {
         return orders.values().stream()
-        .flatMap(o -> o.items.stream().map(item -> new AbstractMap.SimpleEntry<>(item.goodsName, item.price * item.count)))
+        .flatMap(o -> o.items.stream().map(item -> new AbstractMap.SimpleEntry<>(item.googsName, item.price * item.count)))
         .collect(Collectors.groupingBy(entry -> entry.getKey(), Collectors.summingDouble(entry -> entry.getValue())));
     }
 
@@ -116,12 +116,12 @@ class Order {
 }
 
 class OrderItem {
-    public String goodsName;
+    public String googsName;
     public int count;
     public double price;
 
-    public OrderItem(String goodsName, int count, double price) {
-        this.goodsName = goodsName;
+    public OrderItem(String googsName, int count, double price) {
+        this.googsName = googsName;
         this.count = count;
         this.price = price;
     }
