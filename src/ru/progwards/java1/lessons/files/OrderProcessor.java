@@ -2,10 +2,10 @@ package ru.progwards.java1.lessons.files;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.nio.file.attribute.FileTime;
+import java.time.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ public class OrderProcessor {
             Files.walk(Paths.get(startPath))
                     .filter(path -> path.toString().endsWith(".csv"))
                     .forEach(path -> {
-                        if (path.toString().contains(shopId) &&
+                        if (shopId == null || path.toString().contains(shopId) &&
                                 (start == null || path.toFile().lastModified() >= start.atStartOfDay(ZoneId.of("Europe/Moscow")).toInstant().toEpochMilli()) &&
                                 (finish == null || path.toFile().lastModified() <= finish.atStartOfDay(ZoneId.of("Europe/Moscow")).toInstant().toEpochMilli())) {
                             try {
@@ -91,7 +91,25 @@ public class OrderProcessor {
         return orders.values().stream()
         .collect(Collectors.groupingBy(o -> o.datetime.toLocalDate(), Collectors.summingDouble(o -> o.sum)));
     }
+
+    public static void main(String[] args) {
+        OrderProcessor orderProcessor = new OrderProcessor("C:\\rr");
+        LocalDate finish = LocalDate.of(2022,8,9);
+        System.out.println(orderProcessor.loadOrders(null, finish, null));
+        for (Order o : orderProcessor.process(null))
+            System.out.println(o.datetime);
+        Path path = Paths.get("C:\\rr\\folder 1\\S01-P01X02-0002.csv");
+        try {
+            System.out.println(Files.setLastModifiedTime(path, FileTime.from(Instant.ofEpochSecond(LocalDateTime.of(2020,2,2,0,2).toEpochSecond(ZoneOffset.UTC)))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Paths.get("C:\\Users\\User\\Documents\\Progwards\\test folder").relativize(Paths.get("C:\\Users\\User\\Documents\\Progwards\\test folder\\folder 1\\S01-P01X02-0002.csv")));
+    }
 }
+
+
+
 class Order {
     public String shopId;
     public String orderId;
@@ -124,6 +142,7 @@ class OrderItem {
     public double price;
 
     public OrderItem() {
+
     }
 
     public OrderItem(java.lang.String googsName, int count, double price) {
