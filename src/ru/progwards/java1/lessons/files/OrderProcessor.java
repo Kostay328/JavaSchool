@@ -100,6 +100,9 @@ class Order {
     public List<OrderItem> items;
     public double sum;
 
+    public Order() {
+    }
+
     public Order(String shopId, String orderId, String customerId, LocalDateTime datetime) {
         this.shopId = shopId;
         this.orderId = orderId;
@@ -120,7 +123,10 @@ class OrderItem {
     public int count;
     public double price;
 
-    public OrderItem(String googsName, int count, double price) {
+    public OrderItem() {
+    }
+
+    public OrderItem(java.lang.String googsName, int count, double price) {
         this.googsName = googsName;
         this.count = count;
         this.price = price;
