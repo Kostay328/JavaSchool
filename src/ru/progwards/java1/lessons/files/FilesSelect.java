@@ -40,7 +40,6 @@ public class FilesSelect {
 
                                     Path targetPath = subFolderPath.resolve(path.getFileName());
                                     Files.copy(path, targetPath);
-                                    System.out.println("Файл " + path + " скопирован в " + targetPath);
                                     break;
                                 }
                             }
