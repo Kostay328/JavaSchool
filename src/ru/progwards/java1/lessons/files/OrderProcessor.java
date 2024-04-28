@@ -96,14 +96,20 @@ public class OrderProcessor {
 
 
     public List<Order> process(String shopId) {
-        if (shopId == null) {
-            return orders.values().stream().sorted(Comparator.comparing(o -> o.datetime)).collect(Collectors.toList());
+        List<Order> result = new ArrayList<>();
+        if (shopId != null) {
+            for (Order order : ordersList) if (order.shopId.equals(shopId)) result.add(order);
         } else {
-            return orders.values().stream()
-            .filter(o -> o.shopId.equals(shopId))
-            .sorted(Comparator.comparing(o -> o.datetime))
-            .collect(Collectors.toList());
+            result.addAll(ordersList);
         }
+        result.sort(new Comparator<Order>() {
+            public int compare(Order o1, Order o2) {
+                if (o1.datetime.isBefore(o2.datetime)) return -1;
+                if (o1.datetime.isAfter(o2.datetime)) return 1;
+                return 0;
+            }
+        });
+        return result;
     }
 
     public Map<String, Double> statisticsByShop() {
