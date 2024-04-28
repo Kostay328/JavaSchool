@@ -113,19 +113,38 @@ public class OrderProcessor {
     }
 
     public Map<String, Double> statisticsByShop() {
-        return orders.values().stream()
-        .collect(Collectors.groupingBy(o -> o.shopId, Collectors.summingDouble(o -> o.sum)));
+        Map<String, Double> statisticsByShop = new TreeMap<>();
+        for (Order order : ordersList) {
+            if (statisticsByShop.putIfAbsent(order.shopId, order.sum) != null) {
+                Double newSum = statisticsByShop.get(order.shopId) + order.sum;
+                statisticsByShop.replace(order.shopId, newSum);
+            }
+        }
+        return statisticsByShop;
     }
 
     public Map<String, Double> statisticsByGoods() {
-        return orders.values().stream()
-        .flatMap(o -> o.items.stream().map(item -> new AbstractMap.SimpleEntry<>(item.googsName, item.price * item.count)))
-        .collect(Collectors.groupingBy(entry -> entry.getKey(), Collectors.summingDouble(entry -> entry.getValue())));
+        Map<String, Double> statisticsByGoods = new TreeMap<>();
+        for (Order order : ordersList) {
+            for (OrderItem orderItem : order.items) {
+                if (statisticsByGoods.putIfAbsent(orderItem.googsName, orderItem.price * orderItem.count) != null) {
+                    Double newSum = statisticsByGoods.get(orderItem.googsName) + orderItem.price * orderItem.count;
+                    statisticsByGoods.replace(orderItem.googsName, newSum);
+                }
+            }
+        }
+        return statisticsByGoods;
     }
 
     public Map<LocalDate, Double> statisticsByDay() {
-        return orders.values().stream()
-        .collect(Collectors.groupingBy(o -> o.datetime.toLocalDate(), Collectors.summingDouble(o -> o.sum)));
+        Map<LocalDate, Double> statisticsByDay = new TreeMap<>();
+        for (Order order : ordersList) {
+            if (statisticsByDay.putIfAbsent(order.datetime.toLocalDate(), order.sum) != null) {
+                Double newSum = statisticsByDay.get(order.datetime.toLocalDate()) + order.sum;
+                statisticsByDay.replace(order.datetime.toLocalDate(), newSum);
+            }
+        }
+        return statisticsByDay;
     }
 }
 
