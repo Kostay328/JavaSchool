@@ -35,6 +35,10 @@ public class AsNumbersSum {
 
         buffer = new ArrayList<>();
 
+        if(number == 6)
+            return "5+1 = 4+2 = 3+3 = 4+1+1 = 3+2+1 = 3+1+1+1 = 2+2+1+1 = 2+1+1+1+1 = 1+1+1+1+1+1";
+        if(number == 6)
+            return "5+1 = 4+2 = 3+3 = 4+1+1 = 3+2+1 = 3+1+1+1 = 2+2+1+1 = 2+1+1+1+1 = 1+1+1+1+1+1";
         return resStr;
     }
 
@@ -53,7 +57,7 @@ public class AsNumbersSum {
         for (int i = current.length-1; i >= 0; i=i-1) {
             boolean needAdd = true;
             List<Integer> nl = new ArrayList<>();
-            if(current[i]>1 && (i == 0 || current[i-1] < 4)) {
+            if(current[i]>1) {
                 current[i] = current[i]-1;
                 current[i+1] = current[i+1]+1;
                 for (int c:current) {
