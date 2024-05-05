@@ -42,7 +42,7 @@ public class HanoiTower {
             }
             System.out.println(line.substring(0,line.length()-1));
         }
-        System.out.println("=================\n");
+        System.out.println("=================");
     }
 
     void setTrace(boolean on){
@@ -84,13 +84,5 @@ public class HanoiTower {
 
     public void move(int from, int to){
         moveStack(from, to, this.size);
-    }
-
-    public static void main(String[] args) {
-        HanoiTower tower = new HanoiTower(4,0);
-        tower.print();
-        tower.setTrace(true);
-        tower.move(0,2);
-        tower.print();
     }
 }
