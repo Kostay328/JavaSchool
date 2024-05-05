@@ -1,97 +1,96 @@
 package ru.progwards.java1.lessons.recursion;
 
-import java.util.*;
+import java.util.ArrayDeque;
+
+import static java.lang.String.format;
 
 public class HanoiTower {
-    private int size;
-    private int pos;
-    private Map<Integer, ArrayDeque<Integer>> map = new HashMap<>();
-    private ArrayDeque<Integer> peg0 = new ArrayDeque<>();
-    private ArrayDeque<Integer> peg1 = new ArrayDeque<>();
-    private ArrayDeque<Integer> peg2 = new ArrayDeque<>();
-    private boolean trace;
+    final static int p3 = 3;
+    int size;
+    int pos;
+    ArrayDeque<Integer>[] pin;
+    boolean setTrace;
 
     public HanoiTower(int size, int pos) {
+        setTrace = false;
         this.size = size;
         this.pos = pos;
-        map.put(0, peg0);
-        map.put(1, peg1);
-        map.put(2, peg2);
-        for (int i = size; i >= 1; i--) {
-            map.get(pos).offerFirst(i);
-        }
+        ArrayDeque<Integer> pin1 = new ArrayDeque<Integer>();
+        ArrayDeque<Integer> pin2 = new ArrayDeque<Integer>();
+        ArrayDeque<Integer> pin3 = new ArrayDeque<Integer>();
+        pin = new ArrayDeque[]{new ArrayDeque<Integer>(), new ArrayDeque<Integer>(), new ArrayDeque<Integer>()};
+        for (int i = size; i>0; i--)
+            pin[pos].addFirst(i);
     }
-
-    public void hanoiTower(int to) {
-        if (to == pos || size == 0) return;
-        if (size == 1) {
-            map.get(to).offerFirst(map.get(pos).poll());
-            return;
-        }
-        if (size % 2 == 1) move(pos, 3 - pos - to);// для нечётного size меняется направление обхода
-        else move(pos, to);
-    }
-
-    public void move(int from, int to) {
-        int sparePeg = 3 - from - to;
-
-        map.get(sparePeg).offerFirst(map.get(from).poll());
-        print();
-        map.get(to).offerFirst(map.get(from).poll());
-        print();
-        map.get(to).offerFirst(map.get(sparePeg).poll());
-        print();
-
-        if (peg0.size() == size || peg1.size() == size || peg2.size() == size) return;// выход при достижении size
-
-        // выбор, какое из больших колец передвигать
-        if (map.get(sparePeg).isEmpty() || (!map.get(from).isEmpty() && map.get(sparePeg).peekFirst() > map.get(from).peekFirst()))
-            map.get(sparePeg).offerFirst(map.get(from).poll());
-        else map.get(from).offerFirst(map.get(sparePeg).poll());
-        print();
-        move(to, sparePeg);
-    }
-
 
     void print() {
-        if (trace) {
-            ArrayDeque<Integer> clone0 = peg0.clone();
-            ArrayDeque<Integer> clone1 = peg1.clone();
-            ArrayDeque<Integer> clone2 = peg2.clone();
-            int[] arr0 = new int[size];
-            int[] arr1 = new int[size];
-            int[] arr2 = new int[size];
+        Integer[][] ar2 = new Integer[p3][];
+        for (int i = 0; i<p3; i++) {
+            ArrayDeque<Integer> pinX = pin[i];
+            Integer[] arrInt = pinX.toArray(new Integer[0]);
+            ar2[i] = arrInt;
+        }
 
-            for (int i = 0; i < size; i++) {
-                arr0[i] = Optional.ofNullable(clone0.pollLast()).orElse(0);
-                arr1[i] = Optional.ofNullable(clone1.pollLast()).orElse(0);
-                arr2[i] = Optional.ofNullable(clone2.pollLast()).orElse(0);
+        for (int i = 0; i<size; i++){
+            StringBuilder line = new StringBuilder();
+            for (int j = 0; j<p3; j++) {
+                int shift = size - ar2[j].length;
+                if (shift > i)
+                    line.append("  I  ").append(" ");
+                else
+                    line.append(format("<%03d>", ar2[j][i - shift])).append(" ");
             }
+            System.out.println(line.substring(0,line.length()-1));
+        }
+        System.out.println("=================\n");
+    }
 
-            for (int i = size - 1; i >= 0; i--) {
-                System.out.println(numFormat(arr0[i]) + " " + numFormat(arr1[i]) + " " + numFormat(arr2[i]));
-            }
-            System.out.println("=================");
+    void setTrace(boolean on){
+        setTrace = on;
+    }
+
+    void moveStack(int from, int to, int count) {
+        if (count > 0){
+            int other = getIndex(from, to);
+            moveStack(from, other,count-1);
+            ArrayDeque<Integer> from_X = this.pin[from];
+            ArrayDeque<Integer> to_X = this.pin[to];
+            int top = from_X.pollFirst();
+            to_X.addFirst(top);
+            if (setTrace)
+                this.print();
+            moveStack(other,to,count-1);
         }
     }
 
-    private String numFormat(Integer n) {
-        if (n == 0) return "  I  ";
-        if (n > 0 && n < 10) return "<00" + n + ">";
-        if (n >= 10 && n < 100) return "<0" + n + ">";
-        if (n >= 100 && n < 1000) return "<" + n + ">";
-        return "<ovl>";
+    static int getIndex(int ind1, int ind2) {
+        int res = 0;
+        switch (ind1) {
+            case 0:
+                if (ind2 == 1) res = 2;
+                else res = 1;
+                break;
+            case 1:
+                if (ind2 == 2) res = 0;
+                else res = 2;
+                break;
+            case 2:
+                if (ind2 == 0) res = 1;
+                else res = 0;
+                break;
+        }
+        return res;
     }
 
-    void setTrace(boolean on) {
-        trace = on;
+    public void move(int from, int to){
+        moveStack(from, to, this.size);
     }
 
     public static void main(String[] args) {
-        HanoiTower ht = new HanoiTower(4, 2);
-        ht.setTrace(true);
-        ht.print();
-        ht.hanoiTower(0);
-        ht.print();
+        HanoiTower tower = new HanoiTower(4,0);
+        tower.print();
+        tower.setTrace(true);
+        tower.move(0,2);
+        tower.print();
     }
 }
