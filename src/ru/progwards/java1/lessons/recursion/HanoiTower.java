@@ -3,13 +3,13 @@ package ru.progwards.java1.lessons.recursion;
 import java.util.*;
 
 public class HanoiTower {
-    int size;
-    int pos;
-    ArrayDeque<Integer> peg0 = new ArrayDeque<>();
-    ArrayDeque<Integer> peg1 = new ArrayDeque<>();
-    ArrayDeque<Integer> peg2 = new ArrayDeque<>();
-    Map<Integer, ArrayDeque<Integer>> map = new HashMap<>();
-    boolean trace;
+    private int size;
+    private int pos;
+    private Map<Integer, ArrayDeque<Integer>> map = new HashMap<>();
+    private ArrayDeque<Integer> peg0 = new ArrayDeque<>();
+    private ArrayDeque<Integer> peg1 = new ArrayDeque<>();
+    private ArrayDeque<Integer> peg2 = new ArrayDeque<>();
+    private boolean trace;
 
     public HanoiTower(int size, int pos) {
         this.size = size;
@@ -25,32 +25,29 @@ public class HanoiTower {
     public void hanoiTower(int to) {
         if (to == pos || size == 0) return;
         if (size == 1) {
-            map.get(to).offerFirst(Objects.requireNonNull(map.get(pos).poll()));
+            map.get(to).offerFirst(map.get(pos).poll());
             return;
         }
-        if (size % 2 == 1)
-            move(pos, 3 - pos - to);
-        else
-            move(pos, to);
+        if (size % 2 == 1) move(pos, 3 - pos - to);// для нечётного size меняется направление обхода
+        else move(pos, to);
     }
 
     public void move(int from, int to) {
         int sparePeg = 3 - from - to;
 
-        map.get(sparePeg).offerFirst(Objects.requireNonNull(map.get(from).poll()));
+        map.get(sparePeg).offerFirst(map.get(from).poll());
         print();
-        map.get(to).offerFirst(Objects.requireNonNull(map.get(from).poll()));
+        map.get(to).offerFirst(map.get(from).poll());
         print();
-        map.get(to).offerFirst(Objects.requireNonNull(map.get(sparePeg).poll()));
+        map.get(to).offerFirst(map.get(sparePeg).poll());
         print();
 
-        if (peg0.size() == size || peg1.size() == size || peg2.size() == size)
-            return;
+        if (peg0.size() == size || peg1.size() == size || peg2.size() == size) return;// выход при достижении size
 
+        // выбор, какое из больших колец передвигать
         if (map.get(sparePeg).isEmpty() || (!map.get(from).isEmpty() && map.get(sparePeg).peekFirst() > map.get(from).peekFirst()))
-            map.get(sparePeg).offerFirst(Objects.requireNonNull(map.get(from).poll()));
-        else
-            map.get(from).offerFirst(Objects.requireNonNull(map.get(sparePeg).poll()));
+            map.get(sparePeg).offerFirst(map.get(from).poll());
+        else map.get(from).offerFirst(map.get(sparePeg).poll());
         print();
         move(to, sparePeg);
     }
@@ -61,7 +58,6 @@ public class HanoiTower {
             ArrayDeque<Integer> clone0 = peg0.clone();
             ArrayDeque<Integer> clone1 = peg1.clone();
             ArrayDeque<Integer> clone2 = peg2.clone();
-
             int[] arr0 = new int[size];
             int[] arr1 = new int[size];
             int[] arr2 = new int[size];
@@ -75,20 +71,27 @@ public class HanoiTower {
             for (int i = size - 1; i >= 0; i--) {
                 System.out.println(numFormat(arr0[i]) + " " + numFormat(arr1[i]) + " " + numFormat(arr2[i]));
             }
-
             System.out.println("=================");
         }
     }
 
     private String numFormat(Integer n) {
-        if (n == 0) return                  "  I  ";
-        if (n > 0 && n < 10) return         "<00" + n + ">";
-        if (n >= 10 && n < 100) return      "<0" + n + ">";
-        if (n >= 100 && n < 1000) return    "<" + n + ">";
+        if (n == 0) return "  I  ";
+        if (n > 0 && n < 10) return "<00" + n + ">";
+        if (n >= 10 && n < 100) return "<0" + n + ">";
+        if (n >= 100 && n < 1000) return "<" + n + ">";
         return "<ovl>";
     }
 
     void setTrace(boolean on) {
         trace = on;
+    }
+
+    public static void main(String[] args) {
+        HanoiTower ht = new HanoiTower(4, 2);
+        ht.setTrace(true);
+        ht.print();
+        ht.hanoiTower(0);
+        ht.print();
     }
 }

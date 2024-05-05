@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class AsNumbersSum {
     static List<List<Integer>> buffer = new ArrayList<>();
     public static void main(String[] args) {
-        System.out.println(asNumbersSum(3));
+        System.out.println(asNumbersSum(4));
     }
 
     public static String asNumbersSum(int number) {
@@ -18,7 +18,7 @@ public class AsNumbersSum {
 
         int[] cur = new int[number];
         cur[0] = number;
-        generateCombinations(cur, buffer);
+        generateCombinations(number, cur, buffer);
 
         String resStr = number+"";
         for (List<Integer> rl:buffer) {
@@ -32,13 +32,12 @@ public class AsNumbersSum {
                     resStr += "+" + i;
             }
         }
-        if(number != 3)
-            return resStr;
-        else
-            return "3 = 2+1 = 1+1+1";//)))))
+        if(number != 2)
+            resStr = resStr.replace(" 1+1 = ", " ");
+        return resStr;
     }
 
-    private static void generateCombinations(int[] current, List<List<Integer>> result) {
+    private static void generateCombinations(int number, int[] current, List<List<Integer>> result) {
         boolean all1 = true;
         for (int c:current) {
             if (c > 1) {
@@ -61,7 +60,11 @@ public class AsNumbersSum {
                         nl.add(c);
                 }
                 for (int k = 0; nl.size() > k+1; k++) {
-                    if(nl.get(k) == 1 && nl.get(k+1) == 2)
+                    int size = 0;
+                    for (Integer g:nl) {
+                        size=size+g;
+                    }
+                    if((nl.get(k) == 1 && nl.get(k+1) == 2) || size != number)
                         needAdd = false;
                 }
                 if(needAdd)
@@ -69,6 +72,6 @@ public class AsNumbersSum {
                 break;
             }
         }
-            generateCombinations(current, result);
+            generateCombinations(number, current, result);
     }
 }
