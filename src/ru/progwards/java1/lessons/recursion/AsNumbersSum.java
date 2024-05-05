@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class AsNumbersSum {
     static List<List<Integer>> buffer = new ArrayList<>();
     public static void main(String[] args) {
-        System.out.println(asNumbersSum(5));
+        System.out.println(asNumbersSum(3));
     }
 
     public static String asNumbersSum(int number) {

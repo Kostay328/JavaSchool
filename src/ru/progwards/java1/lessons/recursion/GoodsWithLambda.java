@@ -69,9 +69,5 @@ public class GoodsWithLambda {
                 .filter(goods -> goods.available > count1 && goods.available < count2)
                 .sorted().collect(Collectors.toList());
     }
-
-    public GoodsWithLambda(List<Goods> goods) {
-        goodsList = goods;
-    }
 }
 
