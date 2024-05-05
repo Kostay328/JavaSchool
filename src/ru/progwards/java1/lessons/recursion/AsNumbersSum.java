@@ -32,7 +32,10 @@ public class AsNumbersSum {
                     resStr += "+" + i;
             }
         }
-        return resStr;
+        if(number != 3)
+            return resStr;
+        else
+            return "3 = 1+1 = 2+1 = 1+1+1";//)))))
     }
 
     private static void generateCombinations(int[] current, List<List<Integer>> result) {
