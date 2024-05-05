@@ -66,8 +66,10 @@ public class GoodsWithLambda {
 
     public List<Goods> countBetween(int count1, int count2) {
         return goodsList.stream()
-                .filter(goods -> goods.available > count1 && goods.available < count2)
-                .sorted().collect(Collectors.toList());
+                .filter(g -> g.available > count1 && g.available < count2)
+                .sorted(Comparator.comparing(g -> g.available))
+                .collect(Collectors.toList());
+
     }
 }
 
