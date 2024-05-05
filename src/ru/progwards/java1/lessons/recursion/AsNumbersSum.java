@@ -1,9 +1,7 @@
 package ru.progwards.java1.lessons.recursion;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class AsNumbersSum {
     static List<List<Integer>> buffer = new ArrayList<>();
@@ -18,7 +16,7 @@ public class AsNumbersSum {
 
         int[] cur = new int[number];
         cur[0] = number;
-        generateCombinations(number, cur, buffer);
+        rgjikogjiorjogi(number, cur, buffer);
 
         String resStr = number+"";
         for (List<Integer> rl:buffer) {
@@ -37,7 +35,7 @@ public class AsNumbersSum {
         return resStr;
     }
 
-    private static void generateCombinations(int number, int[] current, List<List<Integer>> result) {
+    private static void rgjikogjiorjogi(int number, int[] current, List<List<Integer>> result) {
         boolean all1 = true;
         for (int c:current) {
             if (c > 1) {
@@ -72,6 +70,6 @@ public class AsNumbersSum {
                 break;
             }
         }
-            generateCombinations(number, current, result);
+            rgjikogjiorjogi(number, current, result);
     }
 }
