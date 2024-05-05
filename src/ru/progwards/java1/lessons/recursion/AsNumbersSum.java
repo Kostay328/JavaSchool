@@ -20,7 +20,7 @@ public class AsNumbersSum {
         cur[0] = number;
         generateCombinations(cur, buffer);
 
-        String resStr = number+" = 1+1";
+        String resStr = number+"";
         for (List<Integer> rl:buffer) {
             boolean firstAdd = true;
             resStr += " = ";
